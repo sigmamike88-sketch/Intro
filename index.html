@@ -2,11 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <meta name="theme-color" content="#0a0e14" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PC1 — Past Year Exams</title>
     <link
       rel="icon"
@@ -27,12 +23,14 @@
         --accent: #00bfa5;
         --accent-2: #4d9fff;
         --green: #2ecc71;
+        --green-bg: #123a25;
+        --green-border: #1e5c3a;
         --red: #e74c3c;
+        --red-bg: #3a1818;
+        --red-border: #5c2424;
         --blue: #4d9fff;
         --yellow: #f5b800;
         --radius: 16px;
-        --radius-sm: 10px;
-        --radius-xs: 8px;
         --shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
       }
       * {
@@ -43,15 +41,15 @@
       }
       html,
       body {
+        height: 100%;
+      }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         background: var(--bg);
         color: var(--text);
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
-        font-size: 15px;
         line-height: 1.5;
-        min-height: 100vh;
-        -webkit-font-smoothing: antialiased;
+        overscroll-behavior-y: none;
       }
       button {
         font-family: inherit;
@@ -59,105 +57,111 @@
         border: none;
         background: none;
         color: inherit;
+        font-size: inherit;
       }
-      input {
-        font-family: inherit;
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
       }
-      a {
-        color: inherit;
-        text-decoration: none;
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--border-2);
+        border-radius: 4px;
       }
 
       #app {
         min-height: 100vh;
-        padding-bottom: env(safe-area-inset-bottom);
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 24px;
       }
 
       .topbar {
-        position: sticky;
-        top: 0;
-        z-index: 50;
         display: flex;
         align-items: center;
-        gap: 10px;
-        padding: 12px 14px;
-        background: rgba(10, 14, 20, 0.92);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border-bottom: 1px solid var(--border);
+        justify-content: space-between;
+        padding: 16px 18px 10px;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: linear-gradient(180deg, var(--bg) 75%, transparent);
+        backdrop-filter: blur(10px);
+      }
+      .logo-wrap {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        flex: 1;
+        min-width: 0;
       }
       .logo-badge {
-        width: 34px;
-        height: 34px;
-        border-radius: 10px;
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent-2), var(--accent));
         display: grid;
         place-items: center;
-        font-size: 18px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
-        flex-shrink: 0;
+        font-weight: 800;
+        font-size: 13px;
+        color: #fff;
+        letter-spacing: 0.5px;
+        box-shadow: 0 4px 14px rgba(124, 77, 255, 0.35);
       }
       .logo-text {
-        font-size: 15px;
-        font-weight: 700;
-        letter-spacing: -0.2px;
-        line-height: 1.1;
+        font-size: 19px;
+        font-weight: 800;
+        letter-spacing: -0.3px;
       }
       .logo-sub {
         font-size: 11px;
         color: var(--text-dim);
-        line-height: 1.1;
+        font-weight: 500;
       }
-      .topbar-spacer {
-        flex: 1;
+      .logo-wrap > div:last-child {
+        min-width: 0;
+        overflow: hidden;
+      }
+      .logo-text,
+      .logo-sub {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .icon-btn {
-        width: 36px;
-        height: 36px;
-        border-radius: 10px;
-        display: grid;
-        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
         background: var(--bg-3);
         border: 1px solid var(--border);
-        font-size: 15px;
-        transition:
-          background 0.15s,
-          transform 0.1s;
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+        transition: all 0.2s;
       }
       .icon-btn:hover {
         background: var(--card-hover);
+        border-color: var(--border-2);
       }
       .icon-btn:active {
-        transform: scale(0.94);
-      }
-      .avatar {
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        display: grid;
-        place-items: center;
-        font-size: 11px;
-        font-weight: 800;
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
-        color: #fff;
-        flex-shrink: 0;
-      }
-
-      .wrap {
-        padding: 16px 14px 40px;
+        transform: scale(0.95);
       }
 
       .crumbs {
         display: flex;
         align-items: center;
         gap: 6px;
+        padding: 4px 18px 14px;
         font-size: 12px;
+        font-weight: 600;
         color: var(--text-dim);
-        margin-bottom: 10px;
         flex-wrap: wrap;
       }
       .crumb {
         color: var(--text-dim);
-        cursor: default;
+        transition: color 0.15s;
+        padding: 2px 0;
       }
       .crumb.link {
         cursor: pointer;
@@ -165,76 +169,179 @@
       .crumb.link:hover {
         color: var(--accent);
       }
-      .crumb.active {
+      .crumb.current {
         color: var(--text);
-        font-weight: 600;
+        font-weight: 700;
+      }
+      .crumb-sep {
+        opacity: 0.35;
       }
 
       .search-wrap {
-        position: relative;
-        margin-bottom: 16px;
-      }
-      .search-wrap input {
-        width: 100%;
-        padding: 12px 14px 12px 40px;
+        margin: 4px 18px 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
         background: var(--bg-2);
         border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
+        border-radius: 14px;
+        padding: 13px 15px;
+        transition: border-color 0.2s;
+      }
+      .search-wrap:focus-within {
+        border-color: var(--accent-2);
+      }
+      .search-wrap svg {
+        flex-shrink: 0;
+        opacity: 0.55;
+      }
+      .search-wrap input {
+        flex: 1;
+        background: none;
+        border: none;
+        outline: none;
         color: var(--text);
         font-size: 14px;
-        outline: none;
-        transition: border-color 0.15s;
-      }
-      .search-wrap input:focus {
-        border-color: var(--accent);
       }
       .search-wrap input::placeholder {
         color: var(--text-faint);
       }
-      .search-wrap::before {
-        content: "🔍";
+
+      .hero {
+        margin: 0 18px 20px;
+        padding: 22px 20px;
+        border-radius: 18px;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 191, 165, 0.12),
+          rgba(124, 77, 255, 0.12)
+        );
+        border: 1px solid var(--border);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
         position: absolute;
-        left: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 14px;
-        opacity: 0.6;
+        top: -40px;
+        right: -40px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 191, 165, 0.25),
+          transparent 70%
+        );
         pointer-events: none;
+      }
+      .hero-title {
+        font-size: 20px;
+        font-weight: 800;
+        margin-bottom: 6px;
+        letter-spacing: -0.3px;
+      }
+      .hero-sub {
+        font-size: 13px;
+        color: var(--text-dim);
+        line-height: 1.55;
+      }
+
+      .continue-card {
+        margin: 0 18px 18px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--accent);
+        border-radius: 14px;
+        padding: 14px 16px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: left;
+        width: calc(100% - 36px);
+      }
+      .continue-card:hover {
+        background: var(--card-hover);
+        border-color: var(--border-2);
+        border-left-color: var(--accent);
+        transform: translateY(-1px);
+      }
+      .continue-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: var(--bg-3);
+        display: grid;
+        place-items: center;
+        font-size: 20px;
+        flex-shrink: 0;
+      }
+      .continue-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .continue-label {
+        font-size: 10px;
+        font-weight: 800;
+        color: var(--accent);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 3px;
+      }
+      .continue-title {
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .continue-meta {
+        font-size: 11.5px;
+        color: var(--text-dim);
+        margin-top: 2px;
       }
 
       .section-title {
         font-size: 11px;
-        font-weight: 700;
+        font-weight: 800;
+        color: var(--text-faint);
         text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--text-dim);
-        margin: 28px 2px 12px;
+        letter-spacing: 1.2px;
+        padding: 0 18px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
-      .list + .list {
-        margin-top: 14px;
+      .section-title .count {
+        background: var(--bg-3);
+        color: var(--text-dim);
+        padding: 3px 9px;
+        border-radius: 999px;
+        font-size: 10px;
+        font-weight: 700;
       }
 
       .list {
+        padding: 0 18px;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
       }
 
       .course-card {
-        position: relative;
         display: flex;
         align-items: center;
         gap: 14px;
-        width: 100%;
-        text-align: left;
-        padding: 14px;
         background: var(--card);
         border: 1px solid var(--border);
         border-radius: var(--radius);
+        padding: 16px;
+        text-align: left;
+        width: 100%;
         transition:
-          background 0.15s,
-          transform 0.1s,
-          border-color 0.15s;
+          transform 0.15s,
+          border-color 0.2s,
+          background 0.2s;
+        position: relative;
         overflow: hidden;
       }
       .course-card::before {
@@ -243,8 +350,13 @@
         left: 0;
         top: 0;
         bottom: 0;
-        width: 3px;
+        width: 4px;
         background: var(--course-color, var(--accent));
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .course-card:hover::before {
+        opacity: 1;
       }
       .course-card:hover {
         background: var(--card-hover);
@@ -255,436 +367,595 @@
       }
 
       .course-thumb {
-        width: 46px;
-        height: 46px;
-        border-radius: 12px;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
         display: grid;
         place-items: center;
-        font-size: 22px;
+        flex-shrink: 0;
+        font-size: 24px;
         background: var(--course-bg, rgba(0, 191, 165, 0.12));
         border: 1px solid var(--course-border, rgba(0, 191, 165, 0.3));
-        flex-shrink: 0;
       }
-      .course-info {
+      .course-body {
         flex: 1;
         min-width: 0;
       }
-      .course-name {
-        font-size: 15px;
-        font-weight: 700;
+      .course-title {
+        font-size: 16px;
+        font-weight: 800;
+        margin-bottom: 4px;
         letter-spacing: -0.2px;
-        margin-bottom: 2px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
       }
       .course-meta {
         font-size: 12px;
         color: var(--text-dim);
         display: flex;
+        align-items: center;
         gap: 8px;
         flex-wrap: wrap;
       }
-      .course-arrow {
-        color: var(--text-faint);
-        font-size: 18px;
-        flex-shrink: 0;
+      .course-meta .dot {
+        opacity: 0.4;
       }
-
-      .badge-year {
-        display: inline-block;
-        padding: 3px 9px;
-        border-radius: 999px;
-        font-size: 11px;
-        font-weight: 800;
-        background: var(--course-bg, rgba(0, 191, 165, 0.12));
-        color: var(--course-color, var(--accent));
-        border: 1px solid var(--course-border, rgba(0, 191, 165, 0.3));
-      }
-      .year-status {
-        font-size: 11px;
-        font-weight: 700;
-        padding: 3px 9px;
-        border-radius: 999px;
-        flex-shrink: 0;
-      }
-      .year-status.new {
-        background: rgba(77, 159, 255, 0.15);
-        color: var(--blue);
-      }
-      .year-status.progress {
-        background: rgba(245, 184, 0, 0.15);
-        color: var(--yellow);
-      }
-      .year-status.done {
-        background: rgba(46, 204, 113, 0.15);
-        color: var(--green);
-      }
-
       .progress-bar {
-        height: 4px;
+        margin-top: 10px;
+        height: 5px;
         background: var(--bg-3);
-        border-radius: 999px;
+        border-radius: 3px;
         overflow: hidden;
-        margin-top: 8px;
       }
       .progress-fill {
         height: 100%;
-        border-radius: 999px;
+        border-radius: 3px;
         background: linear-gradient(
           90deg,
           var(--course-color, var(--accent)),
           var(--course-color-2, var(--accent-2))
         );
-        transition: width 0.3s ease;
+        transition: width 0.4s ease;
+      }
+      .course-arrow {
+        color: var(--text-faint);
+        flex-shrink: 0;
+      }
+
+      .year-list {
+        padding: 0 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .year-card {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 15px 16px;
+        text-align: left;
+        width: 100%;
+        transition: all 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .year-card:hover {
+        background: var(--card-hover);
+        border-color: var(--border-2);
+        transform: translateY(-1px);
+      }
+      .year-card:active {
+        transform: scale(0.985);
+      }
+      .year-card .badge-year {
+        font-size: 15px;
+        font-weight: 900;
+        letter-spacing: -0.3px;
+        padding: 8px 14px;
+        border-radius: 11px;
+        background: var(--bg-3);
+        border: 1px solid var(--border);
+        color: var(--text);
+        flex-shrink: 0;
+        min-width: 68px;
+        text-align: center;
+      }
+      .year-card .year-body {
+        flex: 1;
+        min-width: 0;
+      }
+      .year-card .year-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      .year-card .year-meta {
+        font-size: 11.5px;
+        color: var(--text-dim);
+      }
+      .year-card .year-status {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+        padding: 4px 9px;
+        border-radius: 7px;
+        text-transform: uppercase;
+        flex-shrink: 0;
+      }
+      .year-status.new {
+        color: var(--blue);
+        background: rgba(77, 159, 255, 0.14);
+      }
+      .year-status.progress {
+        color: var(--yellow);
+        background: rgba(245, 184, 0, 0.14);
+      }
+      .year-status.done {
+        color: var(--green);
+        background: var(--green-bg);
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 60px 24px;
+        color: var(--text-dim);
+        font-size: 14px;
+      }
+      .empty-state .emoji {
+        font-size: 44px;
+        margin-bottom: 14px;
+        display: block;
+        opacity: 0.6;
+      }
+      .empty-state .title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 6px;
+      }
+      .empty-state .desc {
+        font-size: 13px;
+        color: var(--text-dim);
+        max-width: 300px;
+        margin: 0 auto;
+        line-height: 1.6;
       }
 
       .quiz-header {
         display: flex;
         align-items: center;
-        gap: 10px;
-        padding: 12px 14px;
+        gap: 8px;
+        padding: 12px 16px;
         position: sticky;
         top: 0;
-        z-index: 40;
-        background: rgba(10, 14, 20, 0.92);
+        z-index: 20;
+        background: rgba(10, 14, 20, 0.94);
         backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
         border-bottom: 1px solid var(--border);
+        width: 100%;
+      }
+      .quiz-header-info {
+        flex: 1 1 0;
+        min-width: 0;
+        text-align: center;
+        overflow: hidden;
+      }
+      .quiz-header-title {
+        font-size: 14px;
+        font-weight: 700;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .quiz-header-count {
+        font-size: 11px;
+        color: var(--text-dim);
+        margin-top: 1px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .quiz-progress {
         height: 3px;
         background: var(--bg-3);
-        overflow: hidden;
+        position: sticky;
+        top: 65px;
+        z-index: 19;
+        width: 100%;
       }
       .quiz-progress-fill {
         height: 100%;
         background: linear-gradient(90deg, var(--accent), var(--accent-2));
         transition: width 0.3s ease;
       }
+
       .quiz-body {
-        padding: 18px 14px 120px;
+        padding: 20px 18px 30px;
+        flex: 1;
+      }
+      .breadcrumb {
+        font-size: 10.5px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        color: var(--text-faint);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .breadcrumb .dot {
+        color: var(--accent);
+        margin: 0 7px;
       }
       .quiz-title {
-        font-size: 20px;
+        font-size: 26px;
         font-weight: 800;
-        letter-spacing: -0.3px;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
+        letter-spacing: -0.5px;
       }
-      .quiz-sub {
-        font-size: 12px;
+      .quiz-section {
+        font-size: 13px;
         color: var(--text-dim);
-        margin-bottom: 18px;
+        font-style: italic;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 22px;
       }
-      .q-meta {
+
+      .q-tag-row {
         display: flex;
         align-items: center;
-        gap: 8px;
-        margin-bottom: 12px;
+        justify-content: space-between;
+        margin-bottom: 14px;
         flex-wrap: wrap;
+        gap: 8px;
       }
-      .q-num {
+      .q-number {
         font-size: 12px;
-        font-weight: 700;
-        color: var(--text-dim);
-        text-transform: uppercase;
+        font-weight: 800;
+        color: var(--text-faint);
         letter-spacing: 0.5px;
       }
-      .topic-badge,
-      .streak-badge {
-        font-size: 11px;
-        font-weight: 700;
-        padding: 3px 9px;
-        border-radius: 999px;
+      .q-topic {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.7px;
+        padding: 4px 9px;
+        border-radius: 7px;
+        color: var(--blue);
+        background: rgba(77, 159, 255, 0.14);
+        text-transform: uppercase;
+        margin-left: 9px;
       }
-      .topic-badge {
-        background: rgba(0, 191, 165, 0.12);
-        color: var(--accent);
-        border: 1px solid rgba(0, 191, 165, 0.3);
+      .q-meta-badges {
+        display: flex;
+        gap: 6px;
       }
-      .streak-badge {
-        background: rgba(245, 184, 0, 0.12);
+      .meta-badge {
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        padding: 4px 9px;
+        border-radius: 7px;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .meta-badge.streak {
         color: var(--yellow);
-        border: 1px solid rgba(245, 184, 0, 0.3);
+        background: rgba(245, 184, 0, 0.14);
       }
+
       .q-text {
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 600;
         line-height: 1.55;
-        margin-bottom: 18px;
+        margin-bottom: 22px;
+        letter-spacing: -0.2px;
       }
 
       .options {
         display: flex;
         flex-direction: column;
         gap: 10px;
+        margin-bottom: 22px;
       }
       .option {
         display: flex;
         align-items: flex-start;
-        gap: 12px;
-        padding: 14px;
+        gap: 13px;
         background: var(--card);
         border: 1.5px solid var(--border);
-        border-radius: var(--radius-sm);
+        border-radius: var(--radius);
+        padding: 15px 16px;
         text-align: left;
-        transition:
-          background 0.15s,
-          border-color 0.15s,
-          transform 0.1s;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--text);
+        transition: all 0.18s;
+        width: 100%;
       }
-      .option:hover:not(.disabled) {
+      .option:hover:not(.locked) {
+        border-color: var(--accent-2);
         background: var(--card-hover);
-        border-color: var(--border-2);
       }
-      .option:active:not(.disabled) {
+      .option:active:not(.locked) {
         transform: scale(0.99);
       }
-      .option.disabled {
-        cursor: default;
-      }
-      .option.correct {
-        border-color: var(--green);
-        background: rgba(46, 204, 113, 0.1);
-      }
-      .option.wrong {
-        border-color: var(--red);
-        background: rgba(231, 76, 60, 0.1);
-      }
-      .letter {
-        width: 26px;
-        height: 26px;
-        border-radius: 7px;
+      .option .letter {
+        width: 28px;
+        height: 28px;
+        border-radius: 9px;
+        background: var(--bg-3);
+        border: 1px solid var(--border);
         display: grid;
         place-items: center;
         font-size: 12px;
         font-weight: 800;
-        background: var(--bg-3);
-        border: 1px solid var(--border);
+        color: var(--text-dim);
         flex-shrink: 0;
-        margin-top: 1px;
+        transition: all 0.2s;
+      }
+      .option.correct {
+        background: var(--green-bg);
+        border-color: var(--green-border);
       }
       .option.correct .letter {
         background: var(--green);
         color: #fff;
         border-color: var(--green);
       }
+      .option.wrong {
+        background: var(--red-bg);
+        border-color: var(--red-border);
+      }
       .option.wrong .letter {
         background: var(--red);
         color: #fff;
         border-color: var(--red);
       }
-      .option-text {
-        font-size: 14px;
-        line-height: 1.5;
-        flex: 1;
+      .option.locked {
+        cursor: default;
       }
 
       .result-row {
         display: flex;
         align-items: center;
         gap: 10px;
-        padding: 12px 14px;
-        border-radius: var(--radius-sm);
-        margin-top: 16px;
-        font-size: 13px;
-        font-weight: 600;
+        font-size: 14px;
+        font-weight: 800;
+        margin-bottom: 18px;
+        padding: 12px 16px;
+        border-radius: 12px;
+        letter-spacing: 0.2px;
+        animation: slideDown 0.25s ease;
+      }
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
       .result-row.correct {
-        background: rgba(46, 204, 113, 0.12);
-        border: 1px solid rgba(46, 204, 113, 0.3);
         color: var(--green);
+        background: rgba(46, 204, 113, 0.08);
+        border: 1px solid var(--green-border);
       }
       .result-row.wrong {
-        background: rgba(231, 76, 60, 0.12);
-        border: 1px solid rgba(231, 76, 60, 0.3);
         color: var(--red);
+        background: rgba(231, 76, 60, 0.08);
+        border: 1px solid var(--red-border);
+      }
+
+      .action-btns {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .action-btn {
+        padding: 10px 18px;
+        border-radius: 999px;
+        background: var(--bg-3);
+        border: 1px solid var(--border);
+        font-size: 13px;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        transition: all 0.2s;
+      }
+      .action-btn:hover {
+        border-color: var(--border-2);
+        background: var(--card-hover);
+      }
+      .action-btn.active {
+        background: var(--accent-2);
+        border-color: var(--accent-2);
+        color: #fff;
       }
 
       .explanation {
-        margin-top: 12px;
-        padding: 14px;
         background: var(--bg-2);
         border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
+        border-left: 3px solid var(--blue);
+        border-radius: var(--radius);
+        padding: 18px;
+        margin-bottom: 20px;
+        animation: slideDown 0.25s ease;
       }
       .explanation-label {
-        font-size: 11px;
+        font-size: 10.5px;
         font-weight: 800;
+        letter-spacing: 1.2px;
+        color: var(--blue);
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        color: var(--accent);
-        margin-bottom: 6px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
       }
       .explanation-text {
         font-size: 14px;
-        line-height: 1.6;
-        color: var(--text);
+        line-height: 1.7;
+        color: #c9d1d9;
       }
       .explanation-text strong {
-        color: var(--accent);
+        color: var(--text);
+        font-weight: 700;
       }
 
       .q-nav {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(38px, 1fr));
-        gap: 6px;
-        margin-top: 20px;
-        max-height: 220px;
-        overflow-y: auto;
-        padding: 2px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+        margin-bottom: 22px;
+        padding: 16px;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
       }
       .q-nav-btn {
-        aspect-ratio: 1;
-        border-radius: 8px;
-        font-size: 12px;
-        font-weight: 700;
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
         background: var(--bg-3);
         border: 1px solid var(--border);
+        font-size: 12px;
+        font-weight: 800;
         color: var(--text-dim);
-        display: grid;
-        place-items: center;
-        transition: transform 0.1s;
+        transition: all 0.15s;
       }
-      .q-nav-btn:active {
-        transform: scale(0.92);
+      .q-nav-btn:hover {
+        border-color: var(--border-2);
+        color: var(--text);
       }
       .q-nav-btn.current {
-        background: var(--accent);
+        background: var(--accent-2);
         color: #fff;
-        border-color: var(--accent);
+        border-color: var(--accent-2);
+        transform: scale(1.05);
       }
-      .q-nav-btn.correct {
-        background: rgba(46, 204, 113, 0.2);
+      .q-nav-btn.answered-correct {
+        background: var(--green-bg);
         color: var(--green);
-        border-color: rgba(46, 204, 113, 0.4);
+        border-color: var(--green-border);
       }
-      .q-nav-btn.wrong {
-        background: rgba(231, 76, 60, 0.2);
+      .q-nav-btn.answered-wrong {
+        background: var(--red-bg);
         color: var(--red);
-        border-color: rgba(231, 76, 60, 0.4);
+        border-color: var(--red-border);
       }
 
-      .nav-actions {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
+      .nav-buttons {
         display: flex;
         gap: 10px;
-        padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
-        background: rgba(10, 14, 20, 0.95);
-        backdrop-filter: blur(14px);
-        -webkit-backdrop-filter: blur(14px);
-        border-top: 1px solid var(--border);
-        z-index: 30;
+        margin-top: 8px;
       }
       .nav-btn {
         flex: 1;
-        padding: 13px;
-        border-radius: var(--radius-sm);
+        padding: 15px;
+        border-radius: var(--radius);
         font-size: 14px;
-        font-weight: 700;
+        font-weight: 800;
         background: var(--bg-3);
         border: 1px solid var(--border);
-        color: var(--text);
-        transition:
-          background 0.15s,
-          transform 0.1s;
+        transition: all 0.2s;
+        letter-spacing: 0.2px;
       }
       .nav-btn:hover:not(:disabled) {
         background: var(--card-hover);
-      }
-      .nav-btn:active:not(:disabled) {
-        transform: scale(0.97);
-      }
-      .nav-btn:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
+        border-color: var(--border-2);
       }
       .nav-btn.primary {
         background: linear-gradient(135deg, var(--accent), var(--accent-2));
         border-color: transparent;
         color: #fff;
+        box-shadow: 0 4px 14px rgba(0, 191, 165, 0.3);
+      }
+      .nav-btn.primary:hover:not(:disabled) {
+        box-shadow: 0 6px 20px rgba(0, 191, 165, 0.4);
+        transform: translateY(-1px);
+      }
+      .nav-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
       }
 
-      .finish-wrap {
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 24px 14px;
-      }
       .finish-card {
-        width: 100%;
-        max-width: 420px;
-        text-align: center;
-        padding: 32px 22px;
-        background: var(--card);
+        margin: 20px 18px;
+        padding: 32px 24px;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 191, 165, 0.08),
+          rgba(124, 77, 255, 0.08)
+        );
         border: 1px solid var(--border);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
+        border-radius: 20px;
+        text-align: center;
       }
       .finish-emoji {
         font-size: 56px;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
+        display: block;
       }
-      .finish-score {
-        font-size: 40px;
+      .finish-title {
+        font-size: 24px;
         font-weight: 800;
-        letter-spacing: -1px;
-        background: linear-gradient(135deg, var(--accent), var(--accent-2));
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
+        letter-spacing: -0.4px;
       }
       .finish-sub {
-        font-size: 13px;
+        font-size: 14px;
         color: var(--text-dim);
-        margin-bottom: 22px;
+        margin-bottom: 24px;
+        line-height: 1.6;
+      }
+      .finish-score {
+        font-size: 52px;
+        font-weight: 900;
+        letter-spacing: -1.5px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        line-height: 1;
+        margin-bottom: 6px;
+      }
+      .finish-score-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 26px;
       }
       .finish-btns {
         display: flex;
-        flex-direction: column;
         gap: 10px;
-      }
-
-      .empty-state {
-        text-align: center;
-        padding: 50px 20px;
-        color: var(--text-dim);
-      }
-      .empty-state .emoji {
-        font-size: 42px;
-        margin-bottom: 10px;
-      }
-      .empty-state .title {
-        font-size: 16px;
-        font-weight: 700;
-        color: var(--text);
-        margin-bottom: 4px;
-      }
-      .empty-state .sub {
-        font-size: 13px;
+        justify-content: center;
+        flex-wrap: wrap;
       }
 
       .toast {
         position: fixed;
+        bottom: 30px;
         left: 50%;
-        bottom: calc(30px + env(safe-area-inset-bottom));
         transform: translateX(-50%) translateY(20px);
-        padding: 11px 18px;
         background: var(--bg-3);
         border: 1px solid var(--border-2);
-        border-radius: 999px;
+        padding: 12px 22px;
+        border-radius: 12px;
         font-size: 13px;
-        font-weight: 600;
-        color: var(--text);
+        font-weight: 700;
         opacity: 0;
         pointer-events: none;
-        transition:
-          opacity 0.2s,
-          transform 0.2s;
+        transition: all 0.3s;
         z-index: 100;
         white-space: nowrap;
         box-shadow: var(--shadow);
@@ -693,39 +964,350 @@
         opacity: 1;
         transform: translateX(-50%) translateY(0);
       }
-
       @media (min-width: 700px) {
         #app {
           max-width: 680px;
           margin: 0 auto;
-        }
-        .quiz-header {
-          max-width: 680px;
-          margin: 0 auto;
-        }
-        .nav-actions {
-          max-width: 680px;
-          margin: 0 auto;
-          left: 50%;
-          transform: translateX(-50%);
         }
       }
     </style>
   </head>
   <body>
     <div id="app"></div>
-    <div id="toast" class="toast"></div>
+    <div class="toast" id="toast"></div>
 
     <script>
-      /* ============================================================
-                     PC1 MODULE APP
-                     ============================================================ */
+      /* =====================================================================
+                             NOTES DATA — PC1 MODULE
+                             ===================================================================== */
+      const NOTES_DATA = [
+        {
+          id: "biochem",
+          subject: "Biochemistry",
+          title: "Biochemistry — Notes",
+          icon: "🧬",
+          files: [{ title: "Biochemistry", file: "Notes/Biochemistry.pdf" }],
+        },
+        {
+          id: "embryo",
+          subject: "Embryology",
+          title: "Embryology — Notes",
+          icon: "🧫",
+          files: [
+            {
+              title: "Embryology",
+              file: "Notes/Embryology%20Notes/Embryology.pdf",
+            },
+            {
+              title: "Introduction to Embryology for PC1",
+              file: "Notes/Embryology%20Notes/Introduction%20to%20embryology%20for%20PC1.pdf",
+            },
+            {
+              title: "Pharyngeal Apparatus",
+              file: "Notes/Embryology%20Notes/PHARYNGEAL%20APPARATUS.pdf",
+            },
+            {
+              title: "Pharyngeal Apparatus — Development & Derivatives",
+              file: "Notes/Embryology%20Notes/Pharyngeal%20Apparatus_%20Development%20and%20Derivatives.pdf",
+            },
+          ],
+        },
+        {
+          id: "physio",
+          subject: "Physiology",
+          title: "Physiology — Notes",
+          icon: "💪",
+          files: [
+            { title: "Physiology", file: "Notes/Physiology/Physiology.pdf" },
+            {
+              title: "High-Yield Answers & Notes",
+              file: "Notes/Physiology/ans_high_yield_notes.pdf",
+            },
+          ],
+        },
+      ];
+      /* =====================================================================
+                       PPTS DATA — PC1 MODULE
+                       ===================================================================== */
+      const PPTS_DATA = [
+        {
+          id: "histology",
+          subject: "Histology",
+          icon: "🔬",
+          sections: [
+            {
+              name: "Basic Tissues — Part I",
+              icon: "📄",
+              files: [
+                {
+                  title:
+                    "Basic Tissues for Medicine — Introductory Module (Part 1)",
+                  file: "Notes/Histology/Baic%20Tissues%20for%20Medicine%20Introductory%20module.%20part%201.pptx",
+                },
+              ],
+            },
+            {
+              name: "Basic Tissues — Part II",
+              icon: "📄",
+              files: [
+                {
+                  title: "Basic Tissues for Medicine — PPT Portion II",
+                  file: "Notes/Histology/Baic_Tissues_for_Medicine_Introductory_module_ppt_portion_II.pptx",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "biochem",
+          subject: "Biochemistry",
+          icon: "🧬",
+          sections: [
+            {
+              name: "Practice Biochem — MCQs",
+              icon: "📄",
+              files: [
+                {
+                  title: "Carbohydrate Practice Questions",
+                  file: "Biochemistry/Practice%20Biochem/Carbohydrate%20Practice%20Question.pdf",
+                },
+                {
+                  title: "Cell Biochemistry & Cell Signaling MCQs",
+                  file: "Biochemistry/Practice%20Biochem/cell_biochemistry_cell_signaling_mcqs.pdf",
+                },
+                {
+                  title: "Enzyme Biochemistry MCQs",
+                  file: "Biochemistry/Practice%20Biochem/Enzyme_biochemistry_mcqs.pdf",
+                },
+                {
+                  title: "Lipid Practice Questions",
+                  file: "Biochemistry/Practice%20Biochem/Lipid%20Practice%20Questions.pdf",
+                },
+                {
+                  title: "Nucleic Acids MCQs",
+                  file: "Biochemistry/Practice%20Biochem/Nucleic%20Acids%20mcqs.pdf",
+                },
+                {
+                  title: "Protein Practical Questions",
+                  file: "Biochemistry/Practice%20Biochem/Protein%20Practical%20question.pdf",
+                },
+              ],
+            },
+            {
+              name: "Dr. Doc — Exam with Answers",
+              icon: "📄",
+              files: [
+                {
+                  title: "Dr Doc Exam With Answers",
+                  file: "Dr%20Doc%20Exam%20With%20Ans.docx",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "gross",
+          subject: "Gross Anatomy",
+          icon: "🫀",
+          sections: [
+            {
+              name: "Practice Gross",
+              icon: "📄",
+              files: [
+                {
+                  title: "Practice Gross Anatomy",
+                  file: "Gross/Practice%20Gross.pdf",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          id: "physio",
+          subject: "Physiology",
+          icon: "💪",
+          sections: [
+            {
+              name: "Practice Physiology",
+              icon: "📄",
+              files: [
+                {
+                  title: "Practice Physiology",
+                  file: "Physio/Practice%20Physio.pdf",
+                },
+              ],
+            },
+          ],
+        },
+      ];
 
-      const STORAGE_KEY = "pc1_module_progress_v1";
-      const BOOKMARK_KEY = "pc1_bookmarks_v1";
-      const TELEGRAM_URL = "https://t.me/+_SmdJHWESxlhM2Rk";
+      /* =====================================================================
+                             QUIZ DATA — placeholders
+                             ===================================================================== */
+      function placeholderQuestions(subject) {
+        return [
+          {
+            q: `Placeholder question for ${subject}. Select the correct option below.`,
+            options: [
+              { letter: "A", text: "Option A" },
+              { letter: "B", text: "Option B" },
+              { letter: "C", text: "Option C" },
+              { letter: "D", text: "Option D" },
+            ],
+            correct: "A",
+            explanation: `This is a placeholder explanation for the ${subject} question. Real questions will be added later.`,
+          },
+        ];
+      }
 
-      /* ---------- COURSE STYLES ---------- */
+      const QUIZ_DATA = [
+        {
+          id: "pc1-biochem-2013",
+          subject: "Biochemistry",
+          topic: "General Biochemistry",
+          year: 2013,
+          title: "Biochemistry 2013",
+          icon: "🧬",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Biochemistry"),
+        },
+        {
+          id: "pc1-biochem-2014",
+          subject: "Biochemistry",
+          topic: "Enzymes",
+          year: 2014,
+          title: "Biochemistry 2014",
+          icon: "🧬",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Biochemistry"),
+        },
+        {
+          id: "pc1-biochem-2015-16-18",
+          subject: "Biochemistry",
+          topic: "Metabolism",
+          year: 2018,
+          title: "Biochemistry 2015, 16, 18",
+          icon: "🧬",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Biochemistry"),
+        },
+        {
+          id: "pc1-biochem-2017",
+          subject: "Biochemistry",
+          topic: "Molecular Biology",
+          year: 2017,
+          title: "Biochemistry 2017",
+          icon: "🧬",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Biochemistry"),
+        },
+        {
+          id: "pc1-embryo-2014",
+          subject: "Embryology",
+          topic: "General Embryology",
+          year: 2014,
+          title: "Embryology 2014",
+          icon: "🧫",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Embryology"),
+        },
+        {
+          id: "pc1-embryo-2026",
+          subject: "Embryology",
+          topic: "Pharyngeal Apparatus",
+          year: 2026,
+          title: "Embryology 2026",
+          icon: "🧫",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Embryology"),
+        },
+        {
+          id: "pc1-gross-2013",
+          subject: "Gross Anatomy",
+          topic: "Upper Limb",
+          year: 2013,
+          title: "Gross Anatomy 2013",
+          icon: "🫀",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Gross Anatomy"),
+        },
+        {
+          id: "pc1-gross-2014-17",
+          subject: "Gross Anatomy",
+          topic: "Thorax",
+          year: 2017,
+          title: "Gross Anatomy 2014, 17",
+          icon: "🫀",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Gross Anatomy"),
+        },
+        {
+          id: "pc1-gross-2018",
+          subject: "Gross Anatomy",
+          topic: "Abdomen",
+          year: 2018,
+          title: "Gross Anatomy 2018",
+          icon: "🫀",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Gross Anatomy"),
+        },
+        {
+          id: "pc1-gross-practice",
+          subject: "Gross Anatomy",
+          topic: "Practice",
+          year: 2025,
+          title: "Gross Anatomy — Practice",
+          icon: "🫀",
+          section: "PC1 Practice",
+          questions: placeholderQuestions("Gross Anatomy"),
+        },
+        {
+          id: "pc1-histo-2014",
+          subject: "Histology",
+          topic: "Basic Tissues",
+          year: 2014,
+          title: "Histology 2014",
+          icon: "🔬",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Histology"),
+        },
+        {
+          id: "pc1-physio-2013-16",
+          subject: "Physiology",
+          topic: "Cell Physiology",
+          year: 2016,
+          title: "Physiology 2013, 14, 15, 16",
+          icon: "💪",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Physiology"),
+        },
+        {
+          id: "pc1-physio-2017",
+          subject: "Physiology",
+          topic: "Nerve & Muscle",
+          year: 2017,
+          title: "Physiology 2017",
+          icon: "💪",
+          section: "PC1 Past Year Exam",
+          questions: placeholderQuestions("Physiology"),
+        },
+        {
+          id: "pc1-physio-practice",
+          subject: "Physiology",
+          topic: "Practice",
+          year: 2025,
+          title: "Physiology — Practice",
+          icon: "💪",
+          section: "PC1 Practice",
+          questions: placeholderQuestions("Physiology"),
+        },
+      ];
+
+      const TELEGRAM_URL = "https://t.me/+RZynnfSuf89lZGE0";
+
+      /* =====================================================================
+                             COURSE STYLING
+                             ===================================================================== */
       const COURSE_STYLE = {
         Biochemistry: {
           icon: "🧬",
@@ -763,8 +1345,7 @@
           border: "rgba(156,39,176,0.3)",
         },
       };
-
-      function styleFor(subject) {
+      function getCourseStyle(subject) {
         return (
           COURSE_STYLE[subject] || {
             icon: "🧫",
@@ -776,481 +1357,12 @@
         );
       }
 
-      /* ---------- NOTES_DATA ----------
-         Paths match your GitHub repo exactly.
-         Spaces are encoded as %20. */
-      const NOTES_DATA = [
-        {
-          subject: "Biochemistry",
-          title: "Biochemistry — Notes",
-          file: "Notes/Biochemistry.pdf",
-          icon: "🧬",
-        },
-        {
-          subject: "Embryology",
-          title: "Embryology — Notes",
-          file: "Notes/Embryology%20Notes/Embryology.pdf",
-          icon: "🧫",
-        },
-        {
-          subject: "Embryology",
-          title: "Introduction to Embryology for PC1",
-          file: "Notes/Embryology%20Notes/Introduction%20to%20embryology%20for%20PC1.pdf",
-          icon: "🧫",
-        },
-        {
-          subject: "Embryology",
-          title: "Pharyngeal Apparatus",
-          file: "Notes/Embryology%20Notes/PHARYNGEAL%20APPARATUS.pdf",
-          icon: "🧫",
-        },
-        {
-          subject: "Embryology",
-          title: "Pharyngeal Apparatus — Development & Derivatives",
-          file: "Notes/Embryology%20Notes/Pharyngeal%20Apparatus_%20Development%20and%20Derivatives.pdf",
-          icon: "🧫",
-        },
-        {
-          subject: "Physiology",
-          title: "Physiology — Notes",
-          file: "Notes/Physiology/Physiology.pdf",
-          icon: "💪",
-        },
-        {
-          subject: "Physiology",
-          title: "High-Yield Answers & Notes",
-          file: "Notes/Physiology/ans_high_yield_notes.pdf",
-          icon: "💪",
-        },
-      ];
+      /* =====================================================================
+                             STORAGE & STATE
+                             ===================================================================== */
+      const STORAGE_KEY = "pc1_module_progress_v1";
+      const BOOKMARK_KEY = "pc1_bookmarks_v1";
 
-      /* ---------- PPTS_DATA ----------
-         Paths match your GitHub repo exactly. */
-      const PPTS_DATA = [
-        {
-          subject: "Histology",
-          emoji: "🔬",
-          teachers: [
-            {
-              name: "Basic Tissues — Part I",
-              files: [
-                {
-                  title:
-                    "Basic Tissues for Medicine — Introductory Module (Part 1)",
-                  file: "Notes/Histology/Baic%20Tissues%20for%20Medicine%20Introductory%20module.%20part%201.pptx",
-                },
-              ],
-            },
-            {
-              name: "Basic Tissues — Part II",
-              files: [
-                {
-                  title: "Basic Tissues for Medicine — PPT Portion II",
-                  file: "Notes/Histology/Baic_Tissues_for_Medicine_Introductory_module_ppt_portion_II.pptx",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          subject: "Biochemistry",
-          emoji: "🧬",
-          teachers: [
-            {
-              name: "Practice Biochem — MCQs",
-              files: [
-                {
-                  title: "Carbohydrate Practice Questions",
-                  file: "Biochemistry/Practice%20Biochem/Carbohydrate%20Practice%20Question.pdf",
-                },
-                {
-                  title: "Cell Biochemistry & Cell Signaling MCQs",
-                  file: "Biochemistry/Practice%20Biochem/cell_biochemistry_cell_signaling_mcqs.pdf",
-                },
-                {
-                  title: "Enzyme Biochemistry MCQs",
-                  file: "Biochemistry/Practice%20Biochem/Enzyme_biochemistry_mcqs.pdf",
-                },
-                {
-                  title: "Lipid Practice Questions",
-                  file: "Biochemistry/Practice%20Biochem/Lipid%20Practice%20Questions.pdf",
-                },
-                {
-                  title: "Nucleic Acids MCQs",
-                  file: "Biochemistry/Practice%20Biochem/Nucleic%20Acids%20mcqs.pdf",
-                },
-                {
-                  title: "Protein Practical Questions",
-                  file: "Biochemistry/Practice%20Biochem/Protein%20Practical%20question.pdf",
-                },
-              ],
-            },
-            {
-              name: "Dr. Doc — Exam with Answers",
-              files: [
-                {
-                  title: "Dr Doc Exam With Answers",
-                  file: "Dr%20Doc%20Exam%20With%20Ans.docx",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          subject: "Gross Anatomy",
-          emoji: "🫀",
-          teachers: [
-            {
-              name: "Practice Gross",
-              files: [
-                {
-                  title: "Practice Gross Anatomy",
-                  file: "Gross/Practice%20Gross.pdf",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          subject: "Physiology",
-          emoji: "💪",
-          teachers: [
-            {
-              name: "Practice Physiology",
-              files: [
-                {
-                  title: "Practice Physiology",
-                  file: "Physio/Practice%20Physio.pdf",
-                },
-              ],
-            },
-          ],
-        },
-      ];
-
-      /* ---------- QUIZ_DATA ---------- */
-      const QUIZ_DATA = [
-        /* ========== BIOCHEMISTRY ========== */
-        {
-          id: "pc1-biochem-2013",
-          subject: "Biochemistry",
-          topic: "General Biochemistry",
-          year: 2013,
-          title: "Biochemistry 2013",
-          icon: "🧬",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Biochemistry 2013 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "C",
-              explanation:
-                "This is a placeholder explanation. Edit the QUIZ_DATA array to replace it with the real question, options, answer, and explanation.",
-            },
-          ],
-        },
-        {
-          id: "pc1-biochem-2014",
-          subject: "Biochemistry",
-          topic: "Enzymes",
-          year: 2014,
-          title: "Biochemistry 2014",
-          icon: "🧬",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Biochemistry 2014 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "A",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-        {
-          id: "pc1-biochem-2015-16-18",
-          subject: "Biochemistry",
-          topic: "Metabolism",
-          year: 2018,
-          title: "Biochemistry 2015, 16, 18",
-          icon: "🧬",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Biochemistry 2015/16/18 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "B",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-        {
-          id: "pc1-biochem-2017",
-          subject: "Biochemistry",
-          topic: "Molecular Biology",
-          year: 2017,
-          title: "Biochemistry 2017",
-          icon: "🧬",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Biochemistry 2017 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "D",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-
-        /* ========== EMBRYOLOGY ========== */
-        {
-          id: "pc1-embryo-2014",
-          subject: "Embryology",
-          topic: "General Embryology",
-          year: 2014,
-          title: "Embryology 2014",
-          icon: "🧫",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Embryology 2014 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "A",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-        {
-          id: "pc1-embryo-2026",
-          subject: "Embryology",
-          topic: "Pharyngeal Apparatus",
-          year: 2026,
-          title: "Embryology 2026",
-          icon: "🧫",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Embryology 2026 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "B",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-
-        /* ========== GROSS ANATOMY ========== */
-        {
-          id: "pc1-gross-2013",
-          subject: "Gross Anatomy",
-          topic: "Upper Limb",
-          year: 2013,
-          title: "Gross Anatomy 2013",
-          icon: "🫀",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Gross Anatomy 2013 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "C",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-        {
-          id: "pc1-gross-2014-17",
-          subject: "Gross Anatomy",
-          topic: "Thorax",
-          year: 2017,
-          title: "Gross Anatomy 2014, 17",
-          icon: "🫀",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Gross Anatomy 2014/17 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "A",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-        {
-          id: "pc1-gross-2018",
-          subject: "Gross Anatomy",
-          topic: "Abdomen",
-          year: 2018,
-          title: "Gross Anatomy 2018",
-          icon: "🫀",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Gross Anatomy 2018 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "D",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-        {
-          id: "pc1-gross-practice",
-          subject: "Gross Anatomy",
-          topic: "Practice",
-          year: 2025,
-          title: "Gross Anatomy — Practice",
-          icon: "🫀",
-          section: "PC1 Practice",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Gross Anatomy practice question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "B",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-
-        /* ========== HISTOLOGY ========== */
-        {
-          id: "pc1-histo-2014",
-          subject: "Histology",
-          topic: "Basic Tissues",
-          year: 2014,
-          title: "Histology 2014",
-          icon: "🔬",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Histology 2014 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "C",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-
-        /* ========== PHYSIOLOGY ========== */
-        {
-          id: "pc1-physio-2013-16",
-          subject: "Physiology",
-          topic: "Cell Physiology",
-          year: 2016,
-          title: "Physiology 2013, 14, 15, 16",
-          icon: "💪",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Physiology 2013–16 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "A",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-        {
-          id: "pc1-physio-2017",
-          subject: "Physiology",
-          topic: "Nerve & Muscle",
-          year: 2017,
-          title: "Physiology 2017",
-          icon: "💪",
-          section: "PC1 Past Year Exam",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Physiology 2017 question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "B",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-        {
-          id: "pc1-physio-practice",
-          subject: "Physiology",
-          topic: "Practice",
-          year: 2025,
-          title: "Physiology — Practice",
-          icon: "💪",
-          section: "PC1 Practice",
-          questions: [
-            {
-              q: "[PLACEHOLDER] Example Physiology practice question — replace with real one.",
-              options: [
-                { letter: "A", text: "Option A" },
-                { letter: "B", text: "Option B" },
-                { letter: "C", text: "Option C" },
-                { letter: "D", text: "Option D" },
-              ],
-              correct: "D",
-              explanation: "This is a placeholder explanation.",
-            },
-          ],
-        },
-      ];
-
-      /* ---------- STATE & STORAGE ---------- */
       function loadProgress() {
         try {
           return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
@@ -1259,7 +1371,9 @@
         }
       }
       function saveProgress() {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
+        } catch {}
       }
       function loadBookmarks() {
         try {
@@ -1269,17 +1383,19 @@
         }
       }
       function saveBookmarks() {
-        localStorage.setItem(BOOKMARK_KEY, JSON.stringify(state.bookmarks));
+        try {
+          localStorage.setItem(BOOKMARK_KEY, JSON.stringify(state.bookmarks));
+        } catch {}
       }
 
       const state = {
         view: "courses",
         search: "",
         course: null,
+        topic: null,
         noteSubject: null,
         pptSubject: null,
         pptTeacher: null,
-        activeNote: null,
         exam: null,
         qIndex: 0,
         showExplanation: false,
@@ -1289,7 +1405,48 @@
         bookmarks: loadBookmarks(),
       };
 
-      /* ---------- UTILITIES ---------- */
+      /* =====================================================================
+                             HELPERS
+                             ===================================================================== */
+      function isBookmarked(examId, qIdx) {
+        return !!(state.bookmarks[examId] && state.bookmarks[examId][qIdx]);
+      }
+      function toggleBookmark(examId, qIdx) {
+        if (!state.bookmarks[examId]) state.bookmarks[examId] = {};
+        if (state.bookmarks[examId][qIdx]) {
+          delete state.bookmarks[examId][qIdx];
+          if (Object.keys(state.bookmarks[examId]).length === 0)
+            delete state.bookmarks[examId];
+          showToast("Bookmark removed");
+        } else {
+          state.bookmarks[examId][qIdx] = true;
+          showToast("⭐ Question bookmarked");
+        }
+        saveBookmarks();
+      }
+
+      function getExamProgress(exam) {
+        const p = state.progress[exam.id] || {};
+        const answered = Object.keys(p).length;
+        const correct = Object.values(p).filter((v) => v.correct).length;
+        return { answered, correct, total: exam.questions.length };
+      }
+      function getCourseProgress(subject) {
+        const exams = QUIZ_DATA.filter((e) => e.subject === subject);
+        const total = exams.reduce((s, e) => s + e.questions.length, 0);
+        const answered = exams.reduce(
+          (s, e) => s + Object.keys(state.progress[e.id] || {}).length,
+          0,
+        );
+        const correct = exams.reduce(
+          (s, e) =>
+            s +
+            Object.values(state.progress[e.id] || {}).filter((v) => v.correct)
+              .length,
+          0,
+        );
+        return { answered, correct, total, examsCount: exams.length };
+      }
       function escapeHtml(s) {
         return String(s).replace(
           /[&<>"']/g,
@@ -1313,30 +1470,10 @@
       function getCourses() {
         return [...new Set(QUIZ_DATA.map((e) => e.subject))];
       }
-      function getExamProgress(exam) {
-        const p = state.progress[exam.id] || {};
-        const answered = Object.keys(p).length;
-        const correct = Object.values(p).filter((v) => v.correct).length;
-        return { answered, correct, total: exam.questions.length };
-      }
-      function getCourseProgress(subject) {
-        const exams = QUIZ_DATA.filter((e) => e.subject === subject);
-        const total = exams.reduce((s, e) => s + e.questions.length, 0);
-        const answered = exams.reduce(
-          (s, e) => s + Object.keys(state.progress[e.id] || {}).length,
-          0,
-        );
-        const correct = exams.reduce(
-          (s, e) =>
-            s +
-            Object.values(state.progress[e.id] || {}).filter((v) => v.correct)
-              .length,
-          0,
-        );
-        return { answered, correct, total, examsCount: exams.length };
-      }
 
-      /* ---------- ROUTER ---------- */
+      /* =====================================================================
+                             RENDER ROUTER
+                             ===================================================================== */
       function render() {
         if (state.view === "quiz") return renderQuiz();
         if (state.view === "finish") return renderFinish();
@@ -1350,990 +1487,1313 @@
         renderCourses();
       }
 
-      /* ---------- TOPBAR ---------- */
-      function topbar() {
-        return `
-                      <div class="topbar">
-                        <div class="logo-badge">🧫</div>
-                        <div>
-                          <div class="logo-text">PC1</div>
-                          <div class="logo-sub">Past Year Exams</div>
-                        </div>
-                        <div class="topbar-spacer"></div>
-                        <a class="icon-btn" href="${TELEGRAM_URL}" target="_blank" rel="noopener" title="Telegram">✈️</a>
-                        <button class="icon-btn" id="navBookmarks" title="Bookmarks">⭐</button>
-                        <div class="avatar">PC1</div>
-                      </div>
-                    `;
-      }
-      function bindTopbar() {
-        const b = document.getElementById("navBookmarks");
-        if (b)
-          b.onclick = () => {
-            state.view = "bookmarks";
-            render();
-          };
-      }
-
-      /* ---------- COURSES VIEW ---------- */
+      /* =====================================================================
+                             COURSES VIEW (home)
+                             ===================================================================== */
       function renderCourses() {
         const courses = getCourses();
-        const search = state.search.trim().toLowerCase();
-        const filtered = courses.filter((c) => {
-          if (!search) return true;
-          if (c.toLowerCase().includes(search)) return true;
-          const exams = QUIZ_DATA.filter((e) => e.subject === c);
-          return exams.some(
-            (e) =>
-              String(e.year).includes(search) ||
-              (e.topic || "").toLowerCase().includes(search) ||
-              (e.title || "").toLowerCase().includes(search),
-          );
-        });
-
-        const bookmarkCount = Object.values(state.bookmarks).reduce(
-          (s, ex) => s + Object.keys(ex).length,
+        const totalQuestions = QUIZ_DATA.reduce(
+          (s, e) => s + e.questions.length,
+          0,
+        );
+        const totalAnswered = QUIZ_DATA.reduce(
+          (s, e) => s + Object.keys(state.progress[e.id] || {}).length,
           0,
         );
 
-        const app = document.getElementById("app");
-        app.innerHTML = `
-                      ${topbar()}
-                      <div class="wrap">
-                        <div class="search-wrap">
-                          <input id="searchInput" type="text" placeholder="Search courses, years, topics…" value="${escapeHtml(state.search)}" />
-                        </div>
-
-                        <div class="section-title">PC1 Courses</div>
-
-                        ${
-                          NOTES_DATA.length
-                            ? `
-                          <div class="section-title">Study Notes</div>
-                          <div class="list">
-                            <button class="course-card" id="quickNotes"
-                              style="--course-color:#7c4dff;--course-color-2:#4d9fff;--course-bg:rgba(124,77,255,0.12);--course-border:rgba(124,77,255,0.3);">
-                              <div class="course-thumb">📝</div>
-                              <div class="course-info">
-                                <div class="course-name">Open Notes</div>
-                                <div class="course-meta"><span>${NOTES_DATA.length} notes across ${new Set(NOTES_DATA.map((n) => n.subject)).size} courses</span></div>
-                              </div>
-                              <div class="course-arrow">›</div>
-                            </button>
-                          </div>
-                        `
-                            : ""
-                        }
-
-                        ${
-                          PPTS_DATA.length
-                            ? `
-                          <div class="section-title">PowerPoints</div>
-                          <div class="list">
-                            <button class="course-card" id="quickPpts"
-                              style="--course-color:#f5b800;--course-color-2:#ff6d00;--course-bg:rgba(245,184,0,0.12);--course-border:rgba(245,184,0,0.3);">
-                              <div class="course-thumb">📊</div>
-                              <div class="course-info">
-                                <div class="course-name">Open PowerPoints</div>
-                                <div class="course-meta"><span>${PPTS_DATA.length} subjects · slides & practice PDFs</span></div>
-                              </div>
-                              <div class="course-arrow">›</div>
-                            </button>
-                          </div>
-                        `
-                            : ""
-                        }
-
-                        <div class="list" id="courseList"></div>
-                      </div>
-                    `;
-
-        bindTopbar();
-
-        const quickPpts = document.getElementById("quickPpts");
-        if (quickPpts)
-          quickPpts.onclick = () => {
-            state.view = "ppts";
-            render();
-          };
-        const quickNotes = document.getElementById("quickNotes");
-        if (quickNotes)
-          quickNotes.onclick = () => {
-            state.view = "notes";
-            render();
-          };
-
-        const searchInput = document.getElementById("searchInput");
-        searchInput.addEventListener("input", (e) => {
-          state.search = e.target.value;
-          render();
-          const el = document.getElementById("searchInput");
-          if (el) {
-            el.focus();
-            el.setSelectionRange(el.value.length, el.value.length);
+        let continueExam = null,
+          continueTime = 0;
+        QUIZ_DATA.forEach((e) => {
+          const p = state.progress[e.id];
+          if (p && Object.keys(p).length > 0) {
+            const lastKey = Object.keys(p)
+              .map(Number)
+              .sort((a, b) => b - a)[0];
+            const t = p[lastKey]?.t || 0;
+            if (t > continueTime) {
+              continueTime = t;
+              continueExam = e;
+            }
           }
         });
 
-        const list = document.getElementById("courseList");
-        if (!filtered.length) {
-          list.innerHTML = `
-                        <div class="empty-state">
-                          <div class="emoji">📚</div>
-                          <div class="title">No exams found</div>
-                          <div class="sub">Try a different search term.</div>
-                        </div>`;
-        } else {
-          filtered.forEach((c) => {
-            const st = styleFor(c);
-            const pr = getCourseProgress(c);
-            const btn = document.createElement("button");
-            btn.className = "course-card";
-            btn.style.setProperty("--course-color", st.color);
-            btn.style.setProperty("--course-color-2", st.color2);
-            btn.style.setProperty("--course-bg", st.bg);
-            btn.style.setProperty("--course-border", st.border);
-            btn.innerHTML = `
-                          <div class="course-thumb">${st.icon}</div>
-                          <div class="course-info">
-                            <div class="course-name">${escapeHtml(c)}</div>
-                            <div class="course-meta">
-                              <span>${pr.examsCount} exam${pr.examsCount === 1 ? "" : "s"}</span>
-                              <span>·</span>
-                              <span>${pr.total} questions</span>
-                            </div>
-                            <div class="progress-bar"><div class="progress-fill" style="width:${pr.total ? Math.round((pr.answered / pr.total) * 100) : 0}%"></div></div>
-                          </div>
-                          <div class="course-arrow">›</div>
-                        `;
-            btn.onclick = () => {
-              state.course = c;
-              state.view = "years";
-              render();
-            };
-            list.appendChild(btn);
+        const filtered = courses.filter((c) => {
+          if (!state.search) return true;
+          return c.toLowerCase().includes(state.search.toLowerCase());
+        });
+
+        const bookmarkCount = Object.values(state.bookmarks).reduce(
+          (s, exam) => s + Object.keys(exam).length,
+          0,
+        );
+        const pptFileCount = PPTS_DATA.reduce(
+          (s, sub) =>
+            s +
+            (sub.sections || []).reduce((t, sec) => t + sec.files.length, 0),
+          0,
+        );
+
+        app.innerHTML = `
+          <header class="topbar">
+            <div class="logo-wrap">
+              <div class="logo-badge">PC1</div>
+              <div>
+                <div class="logo-text">PC1</div>
+                <div class="logo-sub">Past Year Exams</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:8px;">
+              <a class="icon-btn" href="${TELEGRAM_URL}" target="_blank" rel="noopener" title="Videos on Telegram" style="text-decoration:none;background:linear-gradient(135deg,#2AABEE,#229ED9);border-color:#2AABEE;color:#fff;box-shadow:0 3px 12px rgba(42,171,238,0.4);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21.5 3.5L2.5 10.5l5 2 2 6 3.5-4.5 5.5 4 3-14.5z"/></svg>
+              </a>
+              <button class="icon-btn" id="resetBtn" title="Reset all progress">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              </button>
+              <button class="icon-btn" id="bookmarksBtn" title="Bookmarks">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+              </button>
+            </div>
+          </header>
+
+          <div class="hero">
+            <div class="hero-title">PC1 Module 🧫</div>
+            <div class="hero-sub">${totalQuestions} questions across ${courses.length} courses · ${totalAnswered} answered so far</div>
+            ${
+              totalAnswered > 0
+                ? `
+              <div style="margin-top:14px;">
+                <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(--text-dim);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px;">
+                  <span>Overall Progress</span>
+                  <span>${Math.round((totalAnswered / totalQuestions) * 100)}%</span>
+                </div>
+                <div class="progress-bar" style="height:8px;">
+                  <div class="progress-fill" style="width:${(totalAnswered / totalQuestions) * 100}%;background:linear-gradient(90deg, var(--accent), var(--accent-2));"></div>
+                </div>
+              </div>
+            `
+                : ""
+            }
+          </div>
+
+          <div class="search-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+            <input id="searchInput" type="text" placeholder="Search courses..." value="${escapeHtml(state.search)}" />
+          </div>
+
+          ${
+            continueExam
+              ? `
+            <button class="continue-card" data-continue="${continueExam.id}">
+              <div class="continue-icon">${continueExam.icon || "📘"}</div>
+              <div class="continue-body">
+                <div class="continue-label">Continue</div>
+                <div class="continue-title">${escapeHtml(continueExam.title)}</div>
+                <div class="continue-meta">${Object.keys(state.progress[continueExam.id] || {}).length} / ${continueExam.questions.length} answered</div>
+              </div>
+              <svg class="course-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          `
+              : ""
+          }
+
+          ${
+            bookmarkCount > 0
+              ? `
+            <div class="section-title" style="margin-top:8px;">
+              ⭐ Bookmarked Questions
+              <span class="count">${bookmarkCount}</span>
+            </div>
+            <div class="list" style="margin-bottom:16px;">
+              <button class="course-card" data-open-bookmarks="1" style="--course-color:#f5b800;--course-color-2:#ff6d00;">
+                <div class="course-thumb" style="background:rgba(245,184,0,0.12);border-color:rgba(245,184,0,0.3);">⭐</div>
+                <div class="course-body">
+                  <div class="course-title">Review Bookmarked</div>
+                  <div class="course-meta">${bookmarkCount} question${bookmarkCount === 1 ? "" : "s"} · tap to open list</div>
+                </div>
+                <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+          `
+              : ""
+          }
+
+          <div class="section-title">
+            Study Materials
+            <span class="count">2</span>
+          </div>
+
+          <div class="list" style="margin-bottom:16px;">
+            <button class="course-card" data-open-notes-quick="1" style="--course-color:#7c4dff;--course-color-2:#4d9fff;">
+              <div class="course-thumb" style="background:rgba(124,77,255,0.12);border-color:rgba(124,77,255,0.3);">📝</div>
+              <div class="course-body">
+                <div class="course-title">Open Notes</div>
+                <div class="course-meta">${NOTES_DATA.length} subjects · ${NOTES_DATA.reduce((s, n) => s + n.files.length, 0)} files</div>
+              </div>
+              <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <button class="course-card" data-open-ppts-quick="1" style="--course-color:#f5b800;--course-color-2:#ff6d00;">
+              <div class="course-thumb" style="background:rgba(245,184,0,0.12);border-color:rgba(245,184,0,0.3);">📊</div>
+              <div class="course-body">
+                <div class="course-title">PowerPoint Slides</div>
+                <div class="course-meta">${PPTS_DATA.length} subjects · ${pptFileCount} files</div>
+              </div>
+              <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+
+          <div class="section-title">
+            PC1 Courses
+            <span class="count">${filtered.length}</span>
+          </div>
+
+          ${
+            filtered.length === 0
+              ? `
+            <div class="empty-state">
+              <span class="emoji">🔍</span>
+              <div class="title">No results</div>
+              <div class="desc">Nothing matches "${escapeHtml(state.search)}".</div>
+            </div>
+          `
+              : `<div class="list">${filtered.map(renderCourseCard).join("")}</div>`
+          }
+        `;
+
+        bindCourseEvents();
+      }
+
+      function renderCourseCard(subject) {
+        const style = getCourseStyle(subject);
+        const p = getCourseProgress(subject);
+        const pct = p.total ? Math.round((p.answered / p.total) * 100) : 0;
+        return `
+          <button class="course-card" data-course="${escapeHtml(subject)}" style="--course-color:${style.color};--course-color-2:${style.color2};--course-bg:${style.bg};--course-border:${style.border};">
+            <div class="course-thumb" style="background:${style.bg};border-color:${style.border};">${style.icon}</div>
+            <div class="course-body">
+              <div class="course-title">${escapeHtml(subject)}</div>
+              <div class="course-meta">
+                ${p.examsCount} ${p.examsCount === 1 ? "exam" : "exams"}
+                <span class="dot">·</span>
+                ${p.total} questions
+                ${p.answered > 0 ? `<span class="dot">·</span>${p.correct} correct` : ""}
+              </div>
+              ${p.answered > 0 ? `<div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>` : ""}
+            </div>
+            <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        `;
+      }
+
+      function bindCourseEvents() {
+        const search = document.getElementById("searchInput");
+        if (search) {
+          search.addEventListener("input", (e) => {
+            state.search = e.target.value;
+            renderCourses();
+            const s2 = document.getElementById("searchInput");
+            if (s2) {
+              s2.focus();
+              s2.setSelectionRange(s2.value.length, s2.value.length);
+            }
+          });
+        }
+        document.querySelectorAll("[data-course]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.course = el.dataset.course;
+            state.topic = null;
+            state.view = "years";
+            state.search = "";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        const resetBtn = document.getElementById("resetBtn");
+        if (resetBtn) {
+          resetBtn.addEventListener("click", () => {
+            if (
+              !confirm(
+                "⚠️ Reset ALL progress?\n\nThis will erase all your answered questions and start fresh. This cannot be undone.",
+              )
+            )
+              return;
+            localStorage.removeItem(STORAGE_KEY);
+            state.progress = {};
+            state.streak = 0;
+            state.startTime = null;
+            showToast("✓ All progress reset");
+            render();
+            window.scrollTo(0, 0);
           });
         }
 
-        if (bookmarkCount > 0) {
-          const bm = document.createElement("button");
-          bm.className = "course-card";
-          bm.style.setProperty("--course-color", "#f5b800");
-          bm.style.setProperty("--course-color-2", "#ff6d00");
-          bm.style.setProperty("--course-bg", "rgba(245,184,0,0.12)");
-          bm.style.setProperty("--course-border", "rgba(245,184,0,0.3)");
-          bm.innerHTML = `
-                        <div class="course-thumb">⭐</div>
-                        <div class="course-info">
-                          <div class="course-name">Bookmarked Questions</div>
-                          <div class="course-meta"><span>${bookmarkCount} saved</span></div>
-                        </div>
-                        <div class="course-arrow">›</div>
-                      `;
-          bm.onclick = () => {
+        const bookmarksBtn = document.getElementById("bookmarksBtn");
+        if (bookmarksBtn) {
+          bookmarksBtn.addEventListener("click", () => {
             state.view = "bookmarks";
             render();
-          };
-          list.appendChild(bm);
+            window.scrollTo(0, 0);
+          });
         }
+
+        document.querySelectorAll("[data-open-notes-quick]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "notes";
+            state.noteSubject = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+        document.querySelectorAll("[data-open-ppts-quick]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "ppts";
+            state.pptSubject = null;
+            state.pptTeacher = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        document.querySelectorAll("[data-continue]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const exam = QUIZ_DATA.find((e) => e.id === el.dataset.continue);
+            if (!exam) return;
+            state.course = exam.subject;
+            state.exam = exam;
+            const p = state.progress[exam.id] || {};
+            const answered = Object.keys(p)
+              .map(Number)
+              .sort((a, b) => a - b);
+            state.qIndex =
+              answered.length > 0 ? answered[answered.length - 1] : 0;
+            state.showExplanation = false;
+            state.streak = 0;
+            state.startTime = Date.now();
+            state.view = "quiz";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        document.querySelectorAll("[data-open-bookmarks]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "bookmarks";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
       }
 
-      /* ---------- YEARS VIEW ---------- */
+      /* =====================================================================
+                             YEARS VIEW
+                             ===================================================================== */
       function renderYears() {
-        const subject = state.course;
-        const st = styleFor(subject);
-        const exams = QUIZ_DATA.filter((e) => e.subject === subject).sort(
+        const style = getCourseStyle(state.course);
+        const exams = QUIZ_DATA.filter((e) => e.subject === state.course).sort(
           (a, b) => b.year - a.year,
         );
 
-        const app = document.getElementById("app");
         app.innerHTML = `
-                      ${topbar()}
-                      <div class="wrap">
-                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                          <button class="icon-btn" id="backBtn" title="Back">←</button>
-                          <div>
-                            <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">${escapeHtml(subject)}</div>
-                            <div style="font-size:11px;color:var(--text-dim);">${exams.length} ${exams.length === 1 ? "exam" : "exams"} available</div>
-                          </div>
-                        </div>
-                        <div class="section-title">${escapeHtml(subject)} — Exams</div>
-                        <div class="list" id="yearList"></div>
-                      </div>
-                    `;
-        bindTopbar();
-        document.getElementById("backBtn").onclick = () => {
-          state.view = "courses";
-          render();
-        };
+          <header class="topbar">
+            <div class="logo-wrap">
+              <button class="icon-btn" id="backBtn" title="Back to courses" style="margin-right: 4px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="logo-badge" style="background:linear-gradient(135deg, ${style.color}, ${style.color2});">${style.icon}</div>
+              <div>
+                <div class="logo-text">${escapeHtml(state.course)}</div>
+                <div class="logo-sub">${exams.length} ${exams.length === 1 ? "exam" : "exams"} available</div>
+              </div>
+            </div>
+          </header>
 
-        const list = document.getElementById("yearList");
-        if (!exams.length) {
-          list.innerHTML = `
-                        <div class="empty-state">
-                          <div class="emoji">📭</div>
-                          <div class="title">No exams yet</div>
-                          <div class="sub">Add exams to QUIZ_DATA to see them here.</div>
-                        </div>`;
-          return;
-        }
+          <div class="crumbs">
+            <span class="crumb link" data-crumb="courses">Courses</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb current">${escapeHtml(state.course)}</span>
+          </div>
 
-        exams.forEach((exam) => {
-          const pr = getExamProgress(exam);
-          const pct = pr.total ? Math.round((pr.answered / pr.total) * 100) : 0;
-          const status =
-            pr.answered === 0
-              ? { cls: "new", label: "New" }
-              : pr.answered < pr.total
-                ? { cls: "progress", label: "In Progress" }
-                : { cls: "done", label: "Completed" };
+          <div class="section-title">
+            Available Exams
+            <span class="count">${exams.length}</span>
+          </div>
 
-          const btn = document.createElement("button");
-          btn.className = "course-card";
-          btn.style.setProperty("--course-color", st.color);
-          btn.style.setProperty("--course-color-2", st.color2);
-          btn.style.setProperty("--course-bg", st.bg);
-          btn.style.setProperty("--course-border", st.border);
-          btn.innerHTML = `
-                        <div class="course-thumb">${escapeHtml(exam.icon || st.icon)}</div>
-                        <div class="course-info">
-                          <div class="course-name">${escapeHtml(exam.title)}</div>
-                          <div class="course-meta">
-                            <span class="badge-year">${exam.year}</span>
-                            <span>${pr.total} questions</span>
-                          </div>
-                          <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-                        </div>
-                        <div class="year-status ${status.cls}">${status.label}</div>
-                      `;
-          btn.onclick = () => openExam(exam);
-          list.appendChild(btn);
-        });
-      }
+          <div class="year-list">
+            ${
+              exams.length === 0
+                ? `
+              <div class="empty-state">
+                <span class="emoji">📭</span>
+                <div class="title">No exams for this course</div>
+                <div class="desc">Add some exams in the QUIZ_DATA section.</div>
+              </div>
+            `
+                : exams.map((e) => renderYearCard(e, style)).join("")
+            }
+          </div>
+        `;
 
-      function openExam(exam) {
-        state.exam = exam;
-        state.qIndex = 0;
-        state.showExplanation = false;
-        state.streak = 0;
-        state.startTime = Date.now();
-        const p = state.progress[exam.id] || {};
-        const answeredIdx = Object.keys(p)
-          .map(Number)
-          .sort((a, b) => a - b);
-        if (answeredIdx.length && answeredIdx.length < exam.questions.length) {
-          const firstGap = exam.questions.findIndex((_, i) => !(i in p));
-          state.qIndex =
-            firstGap >= 0 ? firstGap : answeredIdx[answeredIdx.length - 1] + 1;
-        } else if (answeredIdx.length === exam.questions.length) {
-          state.qIndex = 0;
-        }
-        state.view = "quiz";
-        render();
-      }
-
-      /* ---------- QUIZ VIEW ---------- */
-      function renderQuiz() {
-        const exam = state.exam;
-        if (!exam) {
-          state.view = "courses";
-          return render();
-        }
-        const q = exam.questions[state.qIndex];
-        if (!q) {
-          state.view = "finish";
-          return render();
-        }
-        const st = styleFor(exam.subject);
-        const p = (state.progress[exam.id] || {})[state.qIndex];
-        const answered = !!p;
-        const isCorrect = answered && p.correct;
-        const isBookmarked = !!(state.bookmarks[exam.id] || {})[state.qIndex];
-        const pct = Math.round(
-          ((state.qIndex + 1) / exam.questions.length) * 100,
-        );
-
-        const app = document.getElementById("app");
-        app.innerHTML = `
-                      <div class="quiz-header">
-                        <button class="icon-btn" id="quizBack">←</button>
-                        <div style="flex:1;min-width:0;overflow:hidden">
-                          <div style="font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${escapeHtml(exam.title)}</div>
-                          <div style="font-size:11px;color:var(--text-dim)">Question ${state.qIndex + 1} of ${exam.questions.length}</div>
-                        </div>
-                        <button class="icon-btn" id="quizBookmark" title="Bookmark">${isBookmarked ? "⭐" : "☆"}</button>
-                        <button class="icon-btn" id="quizClose" title="Exit">✕</button>
-                      </div>
-                      <div class="quiz-progress"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
-
-                      <div class="quiz-body">
-                        <div class="crumbs">
-                          <span class="crumb">${escapeHtml(exam.subject)}</span>
-                          <span>›</span>
-                          <span class="crumb">${exam.year}</span>
-                          <span>›</span>
-                          <span class="crumb active">PC1 PAST YEAR QUIZ</span>
-                        </div>
-
-                        <div class="quiz-title">${escapeHtml(exam.title)}</div>
-                        <div class="quiz-sub">${escapeHtml(exam.section || "")}</div>
-
-                        <div class="q-meta">
-                          <span class="q-num">Q${state.qIndex + 1}</span>
-                          ${exam.topic ? `<span class="topic-badge">${escapeHtml(exam.topic)}</span>` : ""}
-                          ${state.streak > 1 ? `<span class="streak-badge">🔥 ${state.streak}</span>` : ""}
-                        </div>
-
-                        <div class="q-text">${escapeHtml(q.q)}</div>
-                        <div class="options" id="options"></div>
-
-                        ${
-                          answered
-                            ? `
-                          <div class="result-row ${isCorrect ? "correct" : "wrong"}">
-                            ${isCorrect ? "✅ Correct!" : "❌ Incorrect — correct answer is " + escapeHtml(q.correct)}
-                          </div>
-                          <button id="toggleExp" style="
-                            display:inline-flex;align-items:center;gap:6px;
-                            padding:10px 18px;margin-top:12px;
-                            border-radius:999px;
-                            background:linear-gradient(135deg,var(--accent),var(--accent-2));
-                            color:#fff;font-size:13px;font-weight:700;
-                            border:none;cursor:pointer;
-                            box-shadow:0 4px 14px rgba(0,191,165,0.35);
-                            transition:transform .15s,box-shadow .15s;
-                          ">
-                            ${state.showExplanation ? "Hide Explanation" : "Show Explanation"}
-                          </button>
-                          ${
-                            state.showExplanation
-                              ? `
-                            <div class="explanation">
-                              <div class="explanation-label">Explanation</div>
-                              <div class="explanation-text">${q.explanation || ""}</div>
-                            </div>
-                          `
-                              : ""
-                          }
-                        `
-                            : ""
-                        }
-
-                        <div class="section-title">All questions</div>
-                        <div class="q-nav" id="qNav"></div>
-                      </div>
-
-                      <div class="nav-actions">
-                        <button class="nav-btn" id="btnPrev" ${state.qIndex === 0 ? "disabled" : ""}>← Prev</button>
-                        ${
-                          state.qIndex === exam.questions.length - 1
-                            ? `<button class="nav-btn primary" id="btnFinish">Finish</button>`
-                            : `<button class="nav-btn primary" id="btnNext">Next →</button>`
-                        }
-                      </div>
-                    `;
-
-        bindTopbar();
-        document.getElementById("quizBack").onclick = () => {
-          state.view = "years";
-          render();
-        };
-        document.getElementById("quizClose").onclick = () => {
-          state.view = "years";
-          render();
-        };
-        document.getElementById("quizBookmark").onclick = () => {
-          if (!state.bookmarks[exam.id]) state.bookmarks[exam.id] = {};
-          if (state.bookmarks[exam.id][state.qIndex]) {
-            delete state.bookmarks[exam.id][state.qIndex];
-            showToast("Bookmark removed");
-          } else {
-            state.bookmarks[exam.id][state.qIndex] = true;
-            showToast("⭐ Question bookmarked");
-          }
-          saveBookmarks();
-          render();
-        };
-
-        const optsEl = document.getElementById("options");
-        q.options.forEach((opt) => {
-          const el = document.createElement("button");
-          el.className = "option" + (answered ? " disabled" : "");
-          if (answered) {
-            if (opt.letter === q.correct) el.classList.add("correct");
-            else if (opt.letter === p.chosen) el.classList.add("wrong");
-          }
-          el.innerHTML = `
-                        <div class="letter">${escapeHtml(opt.letter)}</div>
-                        <div class="option-text">${escapeHtml(opt.text)}</div>
-                      `;
-          if (!answered) el.onclick = () => pickAnswer(opt.letter);
-          optsEl.appendChild(el);
-        });
-
-        if (answered) {
-          document.getElementById("toggleExp").onclick = () => {
-            state.showExplanation = !state.showExplanation;
+        document.querySelectorAll("[data-crumb]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "courses";
+            state.course = null;
             render();
-          };
-        }
-
-        const qNav = document.getElementById("qNav");
-        exam.questions.forEach((_, i) => {
-          const btn = document.createElement("button");
-          btn.className = "q-nav-btn";
-          const pp = (state.progress[exam.id] || {})[i];
-          if (pp) btn.classList.add(pp.correct ? "correct" : "wrong");
-          if (i === state.qIndex) btn.classList.add("current");
-          btn.textContent = i + 1;
-          btn.onclick = () => {
-            state.qIndex = i;
+            window.scrollTo(0, 0);
+          });
+        });
+        const backBtn = document.getElementById("backBtn");
+        if (backBtn)
+          backBtn.addEventListener("click", () => {
+            state.view = "courses";
+            state.course = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        document.querySelectorAll("[data-exam]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const exam = QUIZ_DATA.find((e) => e.id === el.dataset.exam);
+            if (!exam) return;
+            state.exam = exam;
+            const p = state.progress[exam.id] || {};
+            const answered = Object.keys(p)
+              .map(Number)
+              .sort((a, b) => a - b);
+            state.qIndex =
+              answered.length > 0 ? answered[answered.length - 1] : 0;
             state.showExplanation = false;
+            state.streak = 0;
+            state.startTime = Date.now();
+            state.view = "quiz";
             render();
-          };
-          qNav.appendChild(btn);
+            window.scrollTo(0, 0);
+          });
         });
-
-        const prev = document.getElementById("btnPrev");
-        if (prev)
-          prev.onclick = () => {
-            if (state.qIndex > 0) {
-              state.qIndex--;
-              state.showExplanation = false;
-              render();
-            }
-          };
-        const next = document.getElementById("btnNext");
-        if (next)
-          next.onclick = () => {
-            if (state.qIndex < exam.questions.length - 1) {
-              state.qIndex++;
-              state.showExplanation = false;
-              render();
-            }
-          };
-        const finish = document.getElementById("btnFinish");
-        if (finish)
-          finish.onclick = () => {
-            state.view = "finish";
-            render();
-          };
       }
 
-      function pickAnswer(letter) {
-        const exam = state.exam;
-        const q = exam.questions[state.qIndex];
-        const correct = letter === q.correct;
-        if (!state.progress[exam.id]) state.progress[exam.id] = {};
-        state.progress[exam.id][state.qIndex] = {
-          chosen: letter,
-          correct,
-          t: Date.now(),
-        };
-        state.streak = correct ? state.streak + 1 : 0;
-        saveProgress();
-        render();
-      }
-
-      /* ---------- FINISH VIEW ---------- */
-      function renderFinish() {
-        const exam = state.exam;
-        const pr = getExamProgress(exam);
-        const pct = pr.total ? Math.round((pr.correct / pr.total) * 100) : 0;
-        const emoji =
-          pct >= 100
-            ? "🏆"
-            : pct >= 80
-              ? "🌟"
-              : pct >= 60
-                ? "👍"
-                : pct >= 40
-                  ? "📖"
-                  : "💪";
-        const elapsed = state.startTime
-          ? Math.round((Date.now() - state.startTime) / 1000)
-          : 0;
-        const mm = Math.floor(elapsed / 60);
-        const ss = elapsed % 60;
-
-        const app = document.getElementById("app");
-        app.innerHTML = `
-                      ${topbar()}
-                      <div class="finish-wrap">
-                        <div class="finish-card">
-                          <div class="finish-emoji">${emoji}</div>
-                          <div class="finish-score">${pct}%</div>
-                          <div class="finish-sub">
-                            ${pr.correct} of ${pr.total} correct
-                            ${elapsed ? ` · ${mm}m ${ss}s` : ""}
-                          </div>
-                          <div class="finish-btns">
-                            <button class="nav-btn primary" id="fReview">Review Answers</button>
-                            <button class="nav-btn" id="fBack">Back to Years</button>
-                            <button class="nav-btn" id="fRetry">Retry Exam</button>
-                          </div>
-                        </div>
-                      </div>
-                    `;
-        bindTopbar();
-        document.getElementById("fReview").onclick = () => {
-          state.qIndex = 0;
-          state.showExplanation = true;
-          state.view = "quiz";
-          render();
-        };
-        document.getElementById("fBack").onclick = () => {
-          state.view = "years";
-          render();
-        };
-        document.getElementById("fRetry").onclick = () => {
-          delete state.progress[exam.id];
-          saveProgress();
-          state.qIndex = 0;
-          state.streak = 0;
-          state.startTime = Date.now();
-          state.view = "quiz";
-          render();
-        };
-      }
-
-      /* ---------- NOTES VIEW ---------- */
-      function renderNotesCourses() {
-        const subjects = [...new Set(NOTES_DATA.map((n) => n.subject))];
-        const app = document.getElementById("app");
-        app.innerHTML = `
-                      ${topbar()}
-                      <div class="wrap">
-                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                          <button class="icon-btn" id="backBtn" title="Back">←</button>
-                          <div>
-                            <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">Notes</div>
-                            <div style="font-size:11px;color:var(--text-dim);">${NOTES_DATA.length} note${NOTES_DATA.length === 1 ? "" : "s"} available</div>
-                          </div>
-                        </div>
-                        <div class="crumbs">
-                          <span class="crumb link" id="crumbHome">Home</span>
-                          <span>›</span>
-                          <span class="crumb active">Notes</span>
-                        </div>
-                        <div class="section-title">Notes Library</div>
-                        <div class="list" id="notesList"></div>
-                      </div>
-                    `;
-        bindTopbar();
-        document.getElementById("backBtn").onclick = () => {
-          state.view = "courses";
-          render();
-        };
-        document.getElementById("crumbHome").onclick = () => {
-          state.view = "courses";
-          render();
-        };
-
-        const list = document.getElementById("notesList");
-        if (!subjects.length) {
-          list.innerHTML = `
-                        <div class="empty-state">
-                          <div class="emoji">📝</div>
-                          <div class="title">No notes yet</div>
-                          <div class="sub">Add entries to NOTES_DATA to see them here.</div>
-                        </div>`;
-          return;
+      function renderYearCard(exam, style) {
+        const p = getExamProgress(exam);
+        const pct = p.total ? Math.round((p.answered / p.total) * 100) : 0;
+        let status = "new",
+          statusLabel = "New";
+        if (p.answered === p.total && p.total > 0) {
+          status = "done";
+          statusLabel = "Completed";
+        } else if (p.answered > 0) {
+          status = "progress";
+          statusLabel = "In Progress";
         }
+        return `
+          <button class="year-card" data-exam="${exam.id}">
+            <div class="badge-year" style="background:${style.bg};color:${style.color};border-color:${style.border};">
+              ${exam.year}
+            </div>
+            <div class="year-body">
+              <div class="year-title">${escapeHtml(exam.title)}</div>
+              <div class="year-meta">${p.answered > 0 ? `${p.answered}/${p.total} answered · ${p.correct} correct` : `${p.total} questions`}</div>
+              ${p.answered > 0 ? `<div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:linear-gradient(90deg,${style.color},${style.color2});"></div></div>` : ""}
+            </div>
+            <span class="year-status ${status}">${statusLabel}</span>
+          </button>
+        `;
+      }
 
-        subjects.forEach((sub) => {
-          const st = styleFor(sub);
-          const count = NOTES_DATA.filter((n) => n.subject === sub).length;
-          const btn = document.createElement("button");
-          btn.className = "course-card";
-          btn.style.setProperty("--course-color", st.color);
-          btn.style.setProperty("--course-color-2", st.color2);
-          btn.style.setProperty("--course-bg", st.bg);
-          btn.style.setProperty("--course-border", st.border);
-          btn.innerHTML = `
-                        <div class="course-thumb">${st.icon}</div>
-                        <div class="course-info">
-                          <div class="course-name">${escapeHtml(sub)}</div>
-                          <div class="course-meta"><span>${count} note${count === 1 ? "" : "s"}</span></div>
-                        </div>
-                        <div class="course-arrow">›</div>
-                      `;
-          btn.onclick = () => {
-            state.noteSubject = sub;
+      /* =====================================================================
+                             NOTES — SUBJECTS LIST
+                             ===================================================================== */
+      function renderNotesCourses() {
+        app.innerHTML = `
+          <header class="topbar">
+            <div class="logo-wrap">
+              <button class="icon-btn" id="backBtn" title="Back" style="margin-right: 4px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="logo-badge" style="background:linear-gradient(135deg,#7c4dff,#4d9fff);">📝</div>
+              <div>
+                <div class="logo-text">Notes</div>
+                <div class="logo-sub">${NOTES_DATA.length} subjects available</div>
+              </div>
+            </div>
+          </header>
+
+          <div class="crumbs">
+            <span class="crumb link" data-crumb-notes="courses">Courses</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb current">Notes</span>
+          </div>
+
+          <div class="section-title">
+            Subjects
+            <span class="count">${NOTES_DATA.length}</span>
+          </div>
+
+          <div class="list">
+            ${NOTES_DATA.map((note) => {
+              const style = getCourseStyle(note.subject);
+              return `
+                <button class="course-card" data-note-subject="${escapeHtml(note.subject)}" style="--course-color:${style.color};--course-color-2:${style.color2};--course-bg:${style.bg};--course-border:${style.border};">
+                  <div class="course-thumb" style="background:${style.bg};border-color:${style.border};">${note.icon || style.icon}</div>
+                  <div class="course-body">
+                    <div class="course-title">${escapeHtml(note.subject)}</div>
+                    <div class="course-meta">${note.files.length} ${note.files.length === 1 ? "note" : "notes"}</div>
+                  </div>
+                  <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+              `;
+            }).join("")}
+          </div>
+        `;
+
+        const back = document.getElementById("backBtn");
+        if (back)
+          back.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        document.querySelectorAll("[data-crumb-notes]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+        document.querySelectorAll("[data-note-subject]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.noteSubject = el.dataset.noteSubject;
             state.view = "note";
             render();
-          };
-          list.appendChild(btn);
+            window.scrollTo(0, 0);
+          });
         });
       }
 
       function renderNoteDetail() {
-        const sub = state.noteSubject;
-        const st = styleFor(sub);
-        const notes = NOTES_DATA.filter((n) => n.subject === sub);
-        const app = document.getElementById("app");
-        app.innerHTML = `
-                      ${topbar()}
-                      <div class="wrap">
-                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                          <button class="icon-btn" id="backBtn" title="Back">←</button>
-                          <div>
-                            <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">${escapeHtml(sub)}</div>
-                            <div style="font-size:11px;color:var(--text-dim);">Notes</div>
-                          </div>
-                        </div>
-                        <div class="crumbs">
-                          <span class="crumb link" id="crumbNotes">Notes</span>
-                          <span>›</span>
-                          <span class="crumb active">${escapeHtml(sub)}</span>
-                        </div>
-                        <div class="section-title">${escapeHtml(sub)} — Notes</div>
-                        <div class="list" id="noteList"></div>
-                      </div>
-                    `;
-        bindTopbar();
-        document.getElementById("backBtn").onclick = () => {
+        const noteGroup = NOTES_DATA.find(
+          (n) => n.subject === state.noteSubject,
+        );
+        if (!noteGroup) {
           state.view = "notes";
-          render();
-        };
-        document.getElementById("crumbNotes").onclick = () => {
-          state.view = "notes";
-          render();
-        };
+          return render();
+        }
+        const style = getCourseStyle(noteGroup.subject);
 
-        const list = document.getElementById("noteList");
-        notes.forEach((n) => {
-          const a = document.createElement("a");
-          a.className = "course-card";
-          a.href = n.file;
-          a.target = "_blank";
-          a.rel = "noopener";
-          a.style.setProperty("--course-color", st.color);
-          a.style.setProperty("--course-color-2", st.color2);
-          a.style.setProperty("--course-bg", st.bg);
-          a.style.setProperty("--course-border", st.border);
-          a.innerHTML = `
-                        <div class="course-thumb">${n.icon || st.icon}</div>
-                        <div class="course-info">
-                          <div class="course-name">${escapeHtml(n.title)}</div>
-                          <div class="course-meta"><span>Open document →</span></div>
-                        </div>
-                        <div class="course-arrow">›</div>
-                      `;
-          list.appendChild(a);
+        app.innerHTML = `
+          <header class="topbar">
+            <div class="logo-wrap">
+              <button class="icon-btn" id="backBtn" title="Back" style="margin-right: 4px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="logo-badge" style="background:linear-gradient(135deg,${style.color},${style.color2});">${noteGroup.icon || style.icon}</div>
+              <div>
+                <div class="logo-text">${escapeHtml(noteGroup.subject)}</div>
+                <div class="logo-sub">${noteGroup.files.length} ${noteGroup.files.length === 1 ? "note" : "notes"}</div>
+              </div>
+            </div>
+          </header>
+
+          <div class="crumbs">
+            <span class="crumb link" data-crumb-note="courses">Courses</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb link" data-crumb-note="notes">Notes</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb current">${escapeHtml(noteGroup.subject)}</span>
+          </div>
+
+          <div class="section-title">
+            Available Notes
+            <span class="count">${noteGroup.files.length}</span>
+          </div>
+
+          <div class="list">
+            ${noteGroup.files
+              .map(
+                (f) => `
+              <a class="course-card" href="${escapeHtml(f.file)}" target="_blank" rel="noopener" style="--course-color:${style.color};--course-color-2:${style.color2};--course-bg:${style.bg};--course-border:${style.border};text-decoration:none;color:inherit;">
+                <div class="course-thumb" style="background:${style.bg};border-color:${style.border};">📄</div>
+                <div class="course-body">
+                  <div class="course-title" style="font-size:15px;">${escapeHtml(f.title)}</div>
+                  <div class="course-meta">
+                    <span style="color:${style.color};font-weight:700;">PDF</span>
+                    <span class="dot">·</span>
+                    <span>Tap to open</span>
+                  </div>
+                </div>
+                <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            `,
+              )
+              .join("")}
+          </div>
+        `;
+
+        const back = document.getElementById("backBtn");
+        if (back)
+          back.addEventListener("click", () => {
+            state.view = "notes";
+            render();
+            window.scrollTo(0, 0);
+          });
+        document.querySelectorAll("[data-crumb-note]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const target = el.dataset.crumbNote;
+            state.view = target === "courses" ? "courses" : "notes";
+            render();
+            window.scrollTo(0, 0);
+          });
         });
       }
 
-      /* ---------- PPTs VIEW ---------- */
+      /* =====================================================================
+                             PPTs — SUBJECTS
+                             ===================================================================== */
       function renderPptsCourses() {
-        const app = document.getElementById("app");
-        const totalFiles = PPTS_DATA.reduce(
-          (s, sub) =>
-            s + sub.teachers.reduce((t, te) => t + te.files.length, 0),
-          0,
-        );
-        const totalSections = PPTS_DATA.reduce(
-          (s, sub) => s + sub.teachers.length,
-          0,
-        );
-
         app.innerHTML = `
-                      ${topbar()}
-                      <div class="wrap">
-                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                          <button class="icon-btn" id="backBtn" title="Back">←</button>
-                          <div>
-                            <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">PPTs</div>
-                            <div style="font-size:11px;color:var(--text-dim);">${totalFiles} files · ${totalSections} sections</div>
-                          </div>
-                        </div>
-                        <div class="section-title">PowerPoint Library</div>
-                        <div class="list" id="pptList"></div>
-                      </div>
-                    `;
-        bindTopbar();
-        document.getElementById("backBtn").onclick = () => {
-          state.view = "courses";
-          render();
-        };
+          <header class="topbar">
+            <div class="logo-wrap">
+              <button class="icon-btn" id="backBtn" title="Back" style="margin-right: 4px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="logo-badge" style="background:linear-gradient(135deg,#f5b800,#ff6d00);">📊</div>
+              <div>
+                <div class="logo-text">PPTs</div>
+                <div class="logo-sub">${PPTS_DATA.length} subjects</div>
+              </div>
+            </div>
+          </header>
 
-        const list = document.getElementById("pptList");
-        if (!PPTS_DATA.length) {
-          list.innerHTML = `
-                        <div class="empty-state">
-                          <div class="emoji">📊</div>
-                          <div class="title">No slides yet</div>
-                          <div class="sub">Add entries to PPTS_DATA to see them here.</div>
-                        </div>`;
-          return;
-        }
+          <div class="crumbs">
+            <span class="crumb link" data-crumb-ppts="courses">Courses</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb current">PPTs</span>
+          </div>
 
-        PPTS_DATA.forEach((sub) => {
-          const st = styleFor(sub.subject);
-          const totalFiles = sub.teachers.reduce(
-            (s, t) => s + t.files.length,
-            0,
-          );
-          const btn = document.createElement("button");
-          btn.className = "course-card";
-          btn.style.setProperty("--course-color", st.color);
-          btn.style.setProperty("--course-color-2", st.color2);
-          btn.style.setProperty("--course-bg", st.bg);
-          btn.style.setProperty("--course-border", st.border);
-          btn.innerHTML = `
-                        <div class="course-thumb">${sub.emoji || st.icon}</div>
-                        <div class="course-info">
-                          <div class="course-name">${escapeHtml(sub.subject)}</div>
-                          <div class="course-meta">
-                            <span>${sub.teachers.length} section${sub.teachers.length === 1 ? "" : "s"}</span>
-                            <span>·</span>
-                            <span>${totalFiles} files</span>
-                          </div>
-                        </div>
-                        <div class="course-arrow">›</div>
-                      `;
-          btn.onclick = () => {
-            state.pptSubject = sub.subject;
+          <div class="section-title">
+            Subjects
+            <span class="count">${PPTS_DATA.length}</span>
+          </div>
+
+          <div class="list">
+            ${PPTS_DATA.map((sub) => {
+              const style = getCourseStyle(sub.subject);
+              const fileCount = (sub.sections || []).reduce(
+                (t, sec) => t + sec.files.length,
+                0,
+              );
+              const sectionCount = (sub.sections || []).length;
+              return `
+                <button class="course-card" data-ppt-subject="${escapeHtml(sub.id)}" style="--course-color:${style.color};--course-color-2:${style.color2};--course-bg:${style.bg};--course-border:${style.border};">
+                  <div class="course-thumb" style="background:${style.bg};border-color:${style.border};">${sub.icon || style.icon}</div>
+                  <div class="course-body">
+                    <div class="course-title">${escapeHtml(sub.subject)}</div>
+                    <div class="course-meta">
+                      ${sectionCount} ${sectionCount === 1 ? "section" : "sections"}
+                      <span class="dot">·</span>
+                      ${fileCount} ${fileCount === 1 ? "file" : "files"}
+                    </div>
+                  </div>
+                  <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+              `;
+            }).join("")}
+          </div>
+        `;
+
+        const back = document.getElementById("backBtn");
+        if (back)
+          back.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        document.querySelectorAll("[data-crumb-ppts]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+        document.querySelectorAll("[data-ppt-subject]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.pptSubject = el.dataset.pptSubject;
+            state.pptTeacher = null;
             state.view = "ppt-teachers";
             render();
-          };
-          list.appendChild(btn);
+            window.scrollTo(0, 0);
+          });
         });
       }
 
+      /* =====================================================================
+                             PPTs — SECTIONS (teachers)
+                             ===================================================================== */
       function renderPptsTeachers() {
-        const sub = PPTS_DATA.find((p) => p.subject === state.pptSubject);
-        if (!sub) {
+        const subjectData = PPTS_DATA.find((s) => s.id === state.pptSubject);
+        if (!subjectData) {
           state.view = "ppts";
           return render();
         }
-        const st = styleFor(sub.subject);
-        const app = document.getElementById("app");
-        app.innerHTML = `
-                      ${topbar()}
-                      <div class="wrap">
-                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                          <button class="icon-btn" id="backBtn" title="Back">←</button>
-                          <div>
-                            <div style="font-size:16px;font-weight:700;">${escapeHtml(sub.subject)}</div>
-                            <div style="font-size:11px;color:var(--text-dim);">${sub.teachers.length} sections</div>
-                          </div>
-                        </div>
-                        <div class="crumbs">
-                          <span class="crumb link" id="crumbPpts">PowerPoints</span>
-                          <span>›</span>
-                          <span class="crumb active">${escapeHtml(sub.subject)}</span>
-                        </div>
-                        <div class="section-title">${escapeHtml(sub.subject)} — Sections</div>
-                        <div class="list" id="teacherList"></div>
-                      </div>
-                    `;
-        bindTopbar();
-        document.getElementById("crumbPpts").onclick = () => {
-          state.view = "ppts";
-          render();
-        };
-        document.getElementById("backBtn").onclick = () => {
-          state.view = "ppts";
-          render();
-        };
+        const style = getCourseStyle(subjectData.subject);
 
-        const list = document.getElementById("teacherList");
-        sub.teachers.forEach((t) => {
-          const btn = document.createElement("button");
-          btn.className = "course-card";
-          btn.style.setProperty("--course-color", st.color);
-          btn.style.setProperty("--course-color-2", st.color2);
-          btn.style.setProperty("--course-bg", st.bg);
-          btn.style.setProperty("--course-border", st.border);
-          btn.innerHTML = `
-                        <div class="course-thumb">${sub.emoji || st.icon}</div>
-                        <div class="course-info">
-                          <div class="course-name">${escapeHtml(t.name)}</div>
-                          <div class="course-meta"><span>${t.files.length} file${t.files.length === 1 ? "" : "s"}</span></div>
-                        </div>
-                        <div class="course-arrow">›</div>
-                      `;
-          btn.onclick = () => {
-            state.pptTeacher = t.name;
+        app.innerHTML = `
+          <header class="topbar">
+            <div class="logo-wrap">
+              <button class="icon-btn" id="backBtn" title="Back" style="margin-right: 4px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="logo-badge" style="background:linear-gradient(135deg,${style.color},${style.color2});">${subjectData.icon || style.icon}</div>
+              <div>
+                <div class="logo-text">${escapeHtml(subjectData.subject)}</div>
+                <div class="logo-sub">${(subjectData.sections || []).length} sections</div>
+              </div>
+            </div>
+          </header>
+
+          <div class="crumbs">
+            <span class="crumb link" data-crumb-ppts="courses">Courses</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb link" data-crumb-ppts="ppts">PPTs</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb current">${escapeHtml(subjectData.subject)}</span>
+          </div>
+
+          <div class="section-title">
+            Sections
+            <span class="count">${(subjectData.sections || []).length}</span>
+          </div>
+
+          <div class="list">
+            ${(subjectData.sections || [])
+              .map(
+                (sec) => `
+              <button class="course-card" data-ppt-section="${escapeHtml(sec.name)}" style="--course-color:${style.color};--course-color-2:${style.color2};--course-bg:${style.bg};--course-border:${style.border};">
+                <div class="course-thumb" style="background:${style.bg};border-color:${style.border};">${sec.icon || "📄"}</div>
+                <div class="course-body">
+                  <div class="course-title">${escapeHtml(sec.name)}</div>
+                  <div class="course-meta">${sec.files.length} ${sec.files.length === 1 ? "file" : "files"}</div>
+                </div>
+                <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            `,
+              )
+              .join("")}
+          </div>
+        `;
+
+        const back = document.getElementById("backBtn");
+        if (back)
+          back.addEventListener("click", () => {
+            state.view = "ppts";
+            state.pptSubject = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        document.querySelectorAll("[data-crumb-ppts]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const target = el.dataset.crumbPpts;
+            state.view = target === "courses" ? "courses" : "ppts";
+            state.pptSubject = null;
+            state.pptTeacher = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+        document.querySelectorAll("[data-ppt-section]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.pptTeacher = el.dataset.pptSection;
             state.view = "ppt-files";
             render();
-          };
-          list.appendChild(btn);
+            window.scrollTo(0, 0);
+          });
         });
       }
 
+      /* =====================================================================
+                             PPTs — FILES
+                             ===================================================================== */
       function renderPptsFiles() {
-        const sub = PPTS_DATA.find((p) => p.subject === state.pptSubject);
-        const teacher =
-          sub && sub.teachers.find((t) => t.name === state.pptTeacher);
-        if (!teacher) {
+        const subjectData = PPTS_DATA.find((s) => s.id === state.pptSubject);
+        if (!subjectData) {
+          state.view = "ppts";
+          return render();
+        }
+        const section = (subjectData.sections || []).find(
+          (s) => s.name === state.pptTeacher,
+        );
+        if (!section) {
           state.view = "ppt-teachers";
           return render();
         }
-        const st = styleFor(sub.subject);
-        const app = document.getElementById("app");
-        app.innerHTML = `
-                      ${topbar()}
-                      <div class="wrap">
-                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                          <button class="icon-btn" id="backBtn" title="Back">←</button>
-                          <div>
-                            <div style="font-size:16px;font-weight:700;">${escapeHtml(teacher.name)}</div>
-                            <div style="font-size:11px;color:var(--text-dim);">${teacher.files.length} files</div>
-                          </div>
-                        </div>
-                        <div class="crumbs">
-                          <span class="crumb link" id="crumbPpts">PowerPoints</span>
-                          <span>›</span>
-                          <span class="crumb link" id="crumbSub">${escapeHtml(sub.subject)}</span>
-                          <span>›</span>
-                          <span class="crumb active">${escapeHtml(teacher.name)}</span>
-                        </div>
-                        <div class="section-title">${escapeHtml(teacher.name)} — Files</div>
-                        <div class="list" id="fileList"></div>
-                      </div>
-                    `;
-        bindTopbar();
-        document.getElementById("crumbPpts").onclick = () => {
-          state.view = "ppts";
-          render();
-        };
-        document.getElementById("crumbSub").onclick = () => {
-          state.view = "ppt-teachers";
-          render();
-        };
-        document.getElementById("backBtn").onclick = () => {
-          state.view = "ppt-teachers";
-          render();
-        };
+        const style = getCourseStyle(subjectData.subject);
 
-        const list = document.getElementById("fileList");
-        teacher.files.forEach((f) => {
-          const a = document.createElement("a");
-          a.className = "course-card";
-          a.href = f.file;
-          a.target = "_blank";
-          a.rel = "noopener";
-          a.style.setProperty("--course-color", st.color);
-          a.style.setProperty("--course-color-2", st.color2);
-          a.style.setProperty("--course-bg", st.bg);
-          a.style.setProperty("--course-border", st.border);
-          a.innerHTML = `
-                        <div class="course-thumb">📄</div>
-                        <div class="course-info">
-                          <div class="course-name">${escapeHtml(f.title)}</div>
-                          <div class="course-meta"><span>Open file →</span></div>
-                        </div>
-                        <div class="course-arrow">›</div>
-                      `;
-          list.appendChild(a);
+        app.innerHTML = `
+          <header class="topbar">
+            <div class="logo-wrap">
+              <button class="icon-btn" id="backBtn" title="Back" style="margin-right: 4px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="logo-badge" style="background:linear-gradient(135deg,${style.color},${style.color2});">${section.icon || "📄"}</div>
+              <div>
+                <div class="logo-text">${escapeHtml(section.name)}</div>
+                <div class="logo-sub">${section.files.length} ${section.files.length === 1 ? "file" : "files"}</div>
+              </div>
+            </div>
+          </header>
+
+          <div class="crumbs">
+            <span class="crumb link" data-crumb-ppts="courses">Courses</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb link" data-crumb-ppts="ppts">PPTs</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb link" data-crumb-ppts="subject">${escapeHtml(subjectData.subject)}</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb current">${escapeHtml(section.name)}</span>
+          </div>
+
+          <div class="section-title">
+            Files
+            <span class="count">${section.files.length}</span>
+          </div>
+
+          <div class="list">
+            ${section.files
+              .map(
+                (f) => `
+              <a class="course-card" href="${escapeHtml(f.file)}" target="_blank" rel="noopener" style="--course-color:${style.color};--course-color-2:${style.color2};--course-bg:${style.bg};--course-border:${style.border};text-decoration:none;color:inherit;">
+                <div class="course-thumb" style="background:${style.bg};border-color:${style.border};">📄</div>
+                <div class="course-body">
+                  <div class="course-title" style="font-size:15px;">${escapeHtml(f.title)}</div>
+                  <div class="course-meta">
+                    <span style="color:${style.color};font-weight:700;">PDF</span>
+                    <span class="dot">·</span>
+                    <span>Tap to open</span>
+                  </div>
+                </div>
+                <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+              </a>
+            `,
+              )
+              .join("")}
+          </div>
+        `;
+
+        const back = document.getElementById("backBtn");
+        if (back)
+          back.addEventListener("click", () => {
+            state.view = "ppt-teachers";
+            state.pptTeacher = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        document.querySelectorAll("[data-crumb-ppts]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const target = el.dataset.crumbPpts;
+            if (target === "courses") {
+              state.view = "courses";
+              state.pptSubject = null;
+              state.pptTeacher = null;
+            } else if (target === "ppts") {
+              state.view = "ppts";
+              state.pptSubject = null;
+              state.pptTeacher = null;
+            } else if (target === "subject") {
+              state.view = "ppt-teachers";
+              state.pptTeacher = null;
+            }
+            render();
+            window.scrollTo(0, 0);
+          });
         });
       }
 
-      /* ---------- BOOKMARKS VIEW ---------- */
+      /* =====================================================================
+                             BOOKMARKS LIST VIEW
+                             ===================================================================== */
       function renderBookmarks() {
         const items = [];
         Object.entries(state.bookmarks).forEach(([examId, qs]) => {
           const exam = QUIZ_DATA.find((e) => e.id === examId);
           if (!exam) return;
-          Object.keys(qs).forEach((qIdx) => {
-            const q = exam.questions[Number(qIdx)];
-            if (q) items.push({ exam, qIdx: Number(qIdx), question: q });
+          Object.keys(qs).forEach((qIdxStr) => {
+            const qIdx = parseInt(qIdxStr);
+            const question = exam.questions[qIdx];
+            if (!question) return;
+            items.push({ exam, qIdx, question });
           });
         });
-        const app = document.getElementById("app");
+
         app.innerHTML = `
-                      ${topbar()}
-                      <div class="wrap">
-                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;">
-                          <button class="icon-btn" id="backBtn" title="Back">←</button>
-                          <div>
-                            <div style="font-size:16px;font-weight:700;letter-spacing:-0.2px;">Bookmarks</div>
-                            <div style="font-size:11px;color:var(--text-dim);">${items.length} saved</div>
-                          </div>
-                        </div>
-                        <div class="section-title">Saved Questions</div>
-                        <div class="list" id="bmList"></div>
-                      </div>
-                    `;
-        bindTopbar();
-        document.getElementById("backBtn").onclick = () => {
-          state.view = "courses";
-          render();
-        };
+          <header class="topbar">
+            <div class="logo-wrap">
+              <button class="icon-btn" id="backBtn" title="Back" style="margin-right: 4px;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              </button>
+              <div class="logo-badge" style="background:linear-gradient(135deg,#f5b800,#ff6d00);">⭐</div>
+              <div>
+                <div class="logo-text">Bookmarks</div>
+                <div class="logo-sub">${items.length} ${items.length === 1 ? "question" : "questions"} saved</div>
+              </div>
+            </div>
+          </header>
 
-        const list = document.getElementById("bmList");
-        if (!items.length) {
-          list.innerHTML = `
-                        <div class="empty-state">
-                          <div class="emoji">⭐</div>
-                          <div class="title">No bookmarks yet</div>
-                          <div class="sub">Tap ☆ on any question to save it here.</div>
-                        </div>`;
-          return;
-        }
+          <div class="crumbs">
+            <span class="crumb link" data-crumb-bookmarks="courses">Courses</span>
+            <span class="crumb-sep">›</span>
+            <span class="crumb current">Bookmarks</span>
+          </div>
 
-        items.forEach((item) => {
-          const st = styleFor(item.exam.subject);
-          const btn = document.createElement("button");
-          btn.className = "course-card";
-          btn.style.setProperty("--course-color", st.color);
-          btn.style.setProperty("--course-color-2", st.color2);
-          btn.style.setProperty("--course-bg", st.bg);
-          btn.style.setProperty("--course-border", st.border);
-          btn.innerHTML = `
-                        <div class="course-thumb">⭐</div>
-                        <div class="course-info">
-                          <div class="course-name">${escapeHtml(item.question.q).slice(0, 90)}${item.question.q.length > 90 ? "…" : ""}</div>
-                          <div class="course-meta"><span>${escapeHtml(item.exam.title)}</span><span>·</span><span>Q${item.qIdx + 1}</span></div>
-                        </div>
-                        <div class="course-arrow">›</div>
-                      `;
-          btn.onclick = () => {
-            state.exam = item.exam;
-            state.qIndex = item.qIdx;
-            state.showExplanation = true;
+          ${
+            items.length === 0
+              ? `
+            <div class="empty-state">
+              <span class="emoji">⭐</span>
+              <div class="title">No bookmarks yet</div>
+              <div class="desc">Open any exam and tap the bookmark icon in the header to save a question for later.</div>
+            </div>
+          `
+              : `
+            <div class="section-title">
+              Saved Questions
+              <span class="count">${items.length}</span>
+            </div>
+            <div class="list">
+              ${items.map(renderBookmarkCard).join("")}
+            </div>
+          `
+          }
+        `;
+
+        const back = document.getElementById("backBtn");
+        if (back)
+          back.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        document.querySelectorAll("[data-crumb-bookmarks]").forEach((el) => {
+          el.addEventListener("click", () => {
+            state.view = "courses";
+            render();
+            window.scrollTo(0, 0);
+          });
+        });
+        document.querySelectorAll("[data-bookmark-exam]").forEach((el) => {
+          el.addEventListener("click", () => {
+            const examId = el.dataset.bookmarkExam;
+            const qIdx = parseInt(el.dataset.bookmarkQ);
+            const exam = QUIZ_DATA.find((e) => e.id === examId);
+            if (!exam) return;
+            state.course = exam.subject;
+            state.exam = exam;
+            state.qIndex = qIdx;
+            state.showExplanation = false;
+            state.streak = 0;
+            state.startTime = Date.now();
             state.view = "quiz";
             render();
-          };
-          list.appendChild(btn);
+            window.scrollTo(0, 0);
+          });
         });
       }
 
-      /* ---------- KEYBOARD SHORTCUTS ---------- */
-      document.addEventListener("keydown", (e) => {
-        if (state.view !== "quiz") return;
+      function renderBookmarkCard({ exam, qIdx, question }) {
+        const style = getCourseStyle(exam.subject);
+        const qText =
+          question.q.length > 120
+            ? question.q.slice(0, 120).trim() + "…"
+            : question.q;
+        return `
+          <button class="course-card" data-bookmark-exam="${exam.id}" data-bookmark-q="${qIdx}" style="--course-color:${style.color};--course-color-2:${style.color2};--course-bg:${style.bg};--course-border:${style.border};">
+            <div class="course-thumb" style="background:${style.bg};border-color:${style.border};">${style.icon}</div>
+            <div class="course-body">
+              <div class="course-title" style="font-size:14px;">${escapeHtml(exam.subject)} — ${escapeHtml(exam.title)}</div>
+              <div class="course-meta" style="margin-bottom:6px;">
+                <span style="color:${style.color};font-weight:800;">Q${qIdx + 1}</span>
+                <span class="dot">·</span>
+                <span>${escapeHtml(exam.topic)}</span>
+              </div>
+              <div style="font-size:12.5px;color:var(--text-dim);line-height:1.5;">${escapeHtml(qText)}</div>
+            </div>
+            <svg class="course-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        `;
+      }
+
+      /* =====================================================================
+                             QUIZ VIEW
+                             ===================================================================== */
+      function renderQuiz() {
         const exam = state.exam;
-        if (!exam) return;
         const q = exam.questions[state.qIndex];
-        if (!q) return;
-        const key = e.key.toUpperCase();
-        if (/^[A-E]$/.test(key)) {
-          const exists = q.options.some((o) => o.letter === key);
-          if (exists && !(state.progress[exam.id] || {})[state.qIndex]) {
-            pickAnswer(key);
-            e.preventDefault();
+        const progress = state.progress[exam.id] || {};
+        const savedAnswer = progress[state.qIndex];
+        const answered = !!savedAnswer;
+        const isCorrect = answered && savedAnswer.correct;
+        const pct = Math.round(
+          ((state.qIndex + 1) / exam.questions.length) * 100,
+        );
+
+        const optionsHTML = q.options
+          .map((opt) => {
+            let cls = "option";
+            if (answered) {
+              cls += " locked";
+              if (opt.letter === q.correct) cls += " correct";
+              else if (opt.letter === savedAnswer.chosen) cls += " wrong";
+            }
+            return `
+            <button class="${cls}" data-letter="${opt.letter}">
+              <span class="letter">${opt.letter}</span>
+              <span>${escapeHtml(opt.text)}</span>
+            </button>
+          `;
+          })
+          .join("");
+
+        const qNavHTML = exam.questions
+          .map((_, i) => {
+            const p = progress[i];
+            let cls = "q-nav-btn";
+            if (i === state.qIndex) cls += " current";
+            else if (p)
+              cls += p.correct ? " answered-correct" : " answered-wrong";
+            return `<button class="${cls}" data-qnav="${i}">${i + 1}</button>`;
+          })
+          .join("");
+
+        const allAnswered =
+          Object.keys(progress).length === exam.questions.length;
+
+        app.innerHTML = `
+          <div class="quiz-header">
+            <button class="icon-btn" id="backBtn" title="Back to years">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            </button>
+            <div class="quiz-header-info">
+              <div class="quiz-header-title">${escapeHtml(exam.title)}</div>
+              <div class="quiz-header-count">Q${state.qIndex + 1} of ${exam.questions.length}</div>
+            </div>
+            <button class="icon-btn" id="bookmarkBtn" title="Bookmark this question" style="${isBookmarked(exam.id, state.qIndex) ? "background:rgba(245,184,0,0.15);border-color:rgba(245,184,0,0.5);color:#f5b800;" : ""}">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="${isBookmarked(exam.id, state.qIndex) ? "currentColor" : "none"}" stroke="currentColor" stroke-width="2.2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+            </button>
+            <button class="icon-btn" id="closeBtn" title="Close">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <div class="quiz-progress"><div class="quiz-progress-fill" style="width:${pct}%"></div></div>
+
+          <div class="quiz-body">
+            <div class="breadcrumb">
+              ${escapeHtml(exam.subject.toUpperCase())}
+              <span class="dot">·</span>
+              ${exam.year}
+              <span class="dot">·</span>
+              ${escapeHtml((exam.topic || "").toUpperCase())}
+            </div>
+            <div class="quiz-title">${escapeHtml(exam.title)}</div>
+            <div class="quiz-section">${escapeHtml(exam.section || "")}</div>
+
+            <div class="q-tag-row">
+              <div>
+                <span class="q-number">Q${state.qIndex + 1}</span>
+                ${exam.topic ? `<span class="q-topic">${escapeHtml(exam.topic)}</span>` : ""}
+              </div>
+              <div class="q-meta-badges">
+                ${state.streak > 1 ? `<span class="meta-badge streak">🔥 ${state.streak} streak</span>` : ""}
+              </div>
+            </div>
+
+            <div class="q-text">${escapeHtml(q.q)}</div>
+            <div class="options">${optionsHTML}</div>
+
+            ${
+              answered
+                ? `
+              <div class="result-row ${isCorrect ? "correct" : "wrong"}">
+                ${isCorrect ? "✓ Correct" : "✗ Incorrect — correct answer is " + q.correct}
+              </div>
+              <div class="action-btns">
+                <button class="action-btn ${state.showExplanation ? "active" : ""}" id="explBtn">
+                  ${state.showExplanation ? "Hide Explanation" : "Show Explanation"}
+                </button>
+              </div>
+              ${
+                state.showExplanation
+                  ? `
+                <div class="explanation">
+                  <div class="explanation-label">Explanation</div>
+                  <div class="explanation-text">${(q.explanation || "No explanation provided.").replace(/\n/g, "<br>")}</div>
+                </div>
+              `
+                  : ""
+              }
+            `
+                : ""
+            }
+
+            <div class="q-nav">${qNavHTML}</div>
+
+            <div class="nav-buttons">
+              <button class="nav-btn" id="prevBtn" ${state.qIndex === 0 ? "disabled" : ""}>← Previous</button>
+              ${
+                state.qIndex === exam.questions.length - 1
+                  ? `<button class="nav-btn primary" id="finishBtn">${allAnswered ? "See Results →" : "Next →"}</button>`
+                  : `<button class="nav-btn primary" id="nextBtn">Next →</button>`
+              }
+            </div>
+          </div>
+        `;
+
+        bindQuizEvents();
+      }
+
+      function bindQuizEvents() {
+        const exam = state.exam;
+        const q = exam.questions[state.qIndex];
+
+        document
+          .getElementById("backBtn")
+          .addEventListener("click", goBackToYears);
+        document
+          .getElementById("closeBtn")
+          .addEventListener("click", goBackToYears);
+
+        const bookmarkBtn = document.getElementById("bookmarkBtn");
+        if (bookmarkBtn) {
+          bookmarkBtn.addEventListener("click", () => {
+            toggleBookmark(exam.id, state.qIndex);
+            renderQuiz();
+          });
+        }
+
+        const progress = state.progress[exam.id] || {};
+        const answered = !!progress[state.qIndex];
+
+        if (!answered) {
+          document.querySelectorAll(".option").forEach((opt) => {
+            opt.addEventListener("click", () => pickAnswer(opt.dataset.letter));
+          });
+        }
+
+        const explBtn = document.getElementById("explBtn");
+        if (explBtn) {
+          explBtn.addEventListener("click", () => {
+            state.showExplanation = !state.showExplanation;
+            renderQuiz();
+          });
+        }
+
+        document.querySelectorAll("[data-qnav]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            state.qIndex = parseInt(btn.dataset.qnav);
+            state.showExplanation = false;
+            renderQuiz();
+            window.scrollTo(0, 0);
+          });
+        });
+
+        const prev = document.getElementById("prevBtn");
+        const next = document.getElementById("nextBtn");
+        const finish = document.getElementById("finishBtn");
+        if (prev)
+          prev.addEventListener("click", () => {
+            if (state.qIndex > 0) {
+              state.qIndex--;
+              state.showExplanation = false;
+              renderQuiz();
+              window.scrollTo(0, 0);
+            }
+          });
+        if (next)
+          next.addEventListener("click", () => {
+            if (state.qIndex < exam.questions.length - 1) {
+              state.qIndex++;
+              state.showExplanation = false;
+              renderQuiz();
+              window.scrollTo(0, 0);
+            }
+          });
+        if (finish)
+          finish.addEventListener("click", () => {
+            state.view = "finish";
+            render();
+            window.scrollTo(0, 0);
+          });
+      }
+
+      function pickAnswer(chosen) {
+        const exam = state.exam;
+        const q = exam.questions[state.qIndex];
+        if (!state.progress[exam.id]) state.progress[exam.id] = {};
+        const wasCorrect = chosen === q.correct;
+        state.progress[exam.id][state.qIndex] = {
+          chosen,
+          correct: wasCorrect,
+          t: Date.now(),
+        };
+        saveProgress();
+        if (wasCorrect) {
+          state.streak = (state.streak || 0) + 1;
+          if (state.streak >= 3)
+            showToast(`🔥 ${state.streak} correct in a row!`);
+        } else {
+          state.streak = 0;
+        }
+        state.showExplanation = false;
+        renderQuiz();
+        setTimeout(() => {
+          const r = document.querySelector(".result-row");
+          if (r) r.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 50);
+      }
+
+      function goBackToYears() {
+        state.view = "years";
+        state.exam = null;
+        render();
+        window.scrollTo(0, 0);
+      }
+
+      /* =====================================================================
+                             FINISH VIEW
+                             ===================================================================== */
+      function renderFinish() {
+        const exam = state.exam;
+        const p = getExamProgress(exam);
+        const pct = p.total ? Math.round((p.correct / p.total) * 100) : 0;
+        const elapsed = state.startTime
+          ? Math.round((Date.now() - state.startTime) / 1000)
+          : 0;
+        const mins = Math.floor(elapsed / 60);
+        const secs = elapsed % 60;
+
+        let emoji = "🎉",
+          title = "Great job!",
+          sub = "You finished the exam.";
+        if (pct === 100) {
+          emoji = "🏆";
+          title = "Perfect score!";
+          sub = "You aced every question.";
+        } else if (pct >= 80) {
+          emoji = "🌟";
+          title = "Excellent!";
+          sub = "You're well prepared.";
+        } else if (pct >= 60) {
+          emoji = "👍";
+          title = "Good work!";
+          sub = "Keep practicing to improve.";
+        } else if (pct >= 40) {
+          emoji = "📖";
+          title = "Keep going!";
+          sub = "Review the explanations and try again.";
+        } else {
+          emoji = "💪";
+          title = "Don't give up!";
+          sub = "Practice makes perfect — review and retry.";
+        }
+
+        app.innerHTML = `
+          <header class="topbar">
+            <div class="logo-wrap">
+              <div class="logo-badge">PC1</div>
+              <div>
+                <div class="logo-text">Results</div>
+                <div class="logo-sub">${escapeHtml(exam.title)}</div>
+              </div>
+            </div>
+          </header>
+
+          <div class="finish-card">
+            <span class="finish-emoji">${emoji}</span>
+            <div class="finish-title">${title}</div>
+            <div class="finish-sub">${sub}</div>
+            <div class="finish-score">${pct}%</div>
+            <div class="finish-score-label">${p.correct} of ${p.total} correct · ${mins}m ${secs}s</div>
+            <div class="finish-btns">
+              <button class="nav-btn" id="reviewBtn" style="flex:0;padding:14px 22px;">Review</button>
+              <button class="nav-btn" id="backToYearsBtn" style="flex:0;padding:14px 22px;">Back to Years</button>
+              <button class="nav-btn primary" id="retryBtn" style="flex:0;padding:14px 22px;">Retry</button>
+            </div>
+          </div>
+        `;
+
+        document.getElementById("reviewBtn").addEventListener("click", () => {
+          state.qIndex = 0;
+          state.showExplanation = false;
+          state.view = "quiz";
+          render();
+          window.scrollTo(0, 0);
+        });
+        document
+          .getElementById("backToYearsBtn")
+          .addEventListener("click", () => {
+            state.view = "years";
+            state.exam = null;
+            render();
+            window.scrollTo(0, 0);
+          });
+        document.getElementById("retryBtn").addEventListener("click", () => {
+          if (!confirm("Clear your answers for this exam and start over?"))
+            return;
+          delete state.progress[exam.id];
+          saveProgress();
+          state.qIndex = 0;
+          state.showExplanation = false;
+          state.streak = 0;
+          state.startTime = Date.now();
+          state.view = "quiz";
+          render();
+          window.scrollTo(0, 0);
+        });
+      }
+
+      /* =====================================================================
+                             KEYBOARD SHORTCUTS
+                             ===================================================================== */
+      document.addEventListener("keydown", (e) => {
+        if (state.view === "quiz") {
+          if (
+            ["1", "2", "3", "4", "5", "a", "b", "c", "d", "e"].includes(
+              e.key.toLowerCase(),
+            )
+          ) {
+            const map = {
+              1: "A",
+              2: "B",
+              3: "C",
+              4: "D",
+              5: "E",
+              a: "A",
+              b: "B",
+              c: "C",
+              d: "D",
+              e: "E",
+            };
+            const letter = map[e.key.toLowerCase()];
+            const opt = document.querySelector(
+              `.option[data-letter="${letter}"]:not(.locked)`,
+            );
+            if (opt) opt.click();
+          } else if (e.key === "ArrowRight") {
+            const n = document.getElementById("nextBtn");
+            if (n) n.click();
+          } else if (e.key === "ArrowLeft") {
+            const p = document.getElementById("prevBtn");
+            if (p && !p.disabled) p.click();
+          } else if (e.key === "Escape") {
+            goBackToYears();
           }
-        } else if (e.key === "ArrowLeft" && state.qIndex > 0) {
-          state.qIndex--;
-          state.showExplanation = false;
-          render();
-          e.preventDefault();
-        } else if (
-          e.key === "ArrowRight" &&
-          state.qIndex < exam.questions.length - 1
-        ) {
-          state.qIndex++;
-          state.showExplanation = false;
-          render();
-          e.preventDefault();
-        } else if (e.key === "Escape") {
-          state.view = "years";
-          render();
+        } else if (state.view === "years") {
+          if (e.key === "Escape") {
+            state.view = "courses";
+            state.course = null;
+            render();
+          }
         }
       });
 
-      /* ---------- BOOT ---------- */
+      /* =====================================================================
+                             BOOT
+      ===================================================================== */
       render();
     </script>
   </body>
